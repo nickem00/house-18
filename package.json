@@ -1,0 +1,19 @@
+{
+  "name": "house18",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm --prefix frontend install && npm --prefix backend install",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm --prefix frontend run dev",
+    "server": "npm --prefix backend run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
