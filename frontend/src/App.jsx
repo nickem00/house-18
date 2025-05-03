@@ -1,15 +1,15 @@
-import './App.css'
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header"; // Placeholder
+import Footer from "./components/Footer"; // Placeholder
 
-function App() {
-
-
+export default function App() {
   return (
     <>
-      <div>
-        <h1>Hej tihi</h1>
-      </div>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
-
-export default App
