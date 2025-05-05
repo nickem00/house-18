@@ -40,7 +40,7 @@ const updateUser = async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' });
     }
     try {
-        const user = await User.findById(id);
+        const user = await User.findOne({ user_id: id });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
