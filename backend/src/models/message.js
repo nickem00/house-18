@@ -1,4 +1,4 @@
-import moongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const messageSchema = new moongoose.messageSchema({
     name: { type: String, reqiured: true, trim: true},

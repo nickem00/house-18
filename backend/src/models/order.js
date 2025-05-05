@@ -1,4 +1,4 @@
-import moongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const orderSchema = new moongoose.Schema({
     userID: { type: moongoose.Schema.Types.ObjectId, ref: 'User', required: true },
