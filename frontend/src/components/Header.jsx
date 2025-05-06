@@ -15,7 +15,7 @@ export default function Header() {
                 </ul>
             </nav>
 
-            <h1 className="logo"><Link to="/home">HOUSE 18</Link></h1>
+            <h1 className="logo"><Link to="/">HOUSE 18</Link></h1>
 
             <nav>
                 <ul>

@@ -1,4 +1,6 @@
-# 🏠 House18 – Fullstack Webshop
+![House 18 Wide Logo](https://res.cloudinary.com/dzcqnchjm/image/upload/v1746566707/logo-white-trans_m6bctz.png)
+
+# House18 – Fullstack Webshop
 
 This is a fullstack project built with **React (frontend)** and **Express (backend)**. The goal is to create an e-commerce site as part of a student group assignment.
 
