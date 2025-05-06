@@ -58,6 +58,7 @@ a:not(.logo a):not(.icon):hover::after {
 
 header nav a:hover {
     color: var(--hover-link-color); /* mörkt guldigt */
+    transition: all 0.3s ease;
 }
 
 /* Begränsa underline-animationen till navigationslänkar i headern */
@@ -69,7 +70,7 @@ header nav a::after {
     bottom: 0;
     left: 0;
     background-color: var(--hover-link-color); /* samma mörkt guldiga färg */
-    transition: width 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 header nav a:hover::after {
