@@ -1,4 +1,35 @@
+section {
+    height: 100vh;
+}
+
 .hero-section {
     padding: 5rem 0;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1)), url(https://res.cloudinary.com/dzcqnchjm/image/upload/v1746553300/Backdrop-grey_1_rzbx3j.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 -3rem;
+    position: relative;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
 
+/* Overlay för att minska ljusstyrkan på bara bakgrundsbilden */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Justera opaciteten för att få önskad ljusstyrka */
+    z-index: 1;
+    pointer-events: none; /* Gör så att överlägget inte blockerar interaktioner */
+}
+
+.hero-section * {
+    position: relative;
+    z-index: 2; /* Placerar innehållet ovanför det mörka överlägget */
 }

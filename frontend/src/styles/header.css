@@ -9,6 +9,7 @@ header {
     right: 3rem;  */
     top: 0;
     align-items: baseline;
+    z-index: 1000;
 }
 
 .logo {
