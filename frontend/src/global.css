@@ -2,13 +2,20 @@
     --background-color: #000;
     --text-color: #fff;
     --main-font: 'Inter', sans-serif;
+    --logo-font: 'Long Cang', cursive;
+    --hover-link-color: #ac8537; 
+}
+
+html {
+    padding: 0 3rem;
 }
 
 html, body {
     margin: 0;
-    padding: 0;
-    height: 0;
+    min-height: 100vh; 
 }
+
+
 
 body {
     background-color: var(--background-color);

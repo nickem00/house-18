@@ -1,0 +1,24 @@
+/* Footer styling som säkerställer att footern alltid är längst ner på sidan */
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  background-color: #00000000;
+  padding: 1rem 0;
+}
+
+/* Behöver justeras på html och body för att få sticky footer att fungera */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ser till att main-innehållet tar upp tillgängligt utrymme */
+main {
+  flex: 1 0 auto;
+}

@@ -1,0 +1,72 @@
+header {
+    background-color: #00000000;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 6rem); /* adjusting with the padding of html */
+    box-sizing: border-box;
+    /* left: 3rem; 
+    right: 3rem;  */
+    top: 0;
+    align-items: baseline;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--logo-font);
+    font-size: 4rem;
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    position: relative;
+    padding-bottom: 2px;
+}
+
+/* Exkludera länken inuti logotypen från hover-effekt */
+.logo a, .logo a:hover {
+    color: var(--text-color);
+}
+
+.logo a::after {
+    display: none;
+}
+
+/* hide pseudo-element on icon links */
+a.icon::after {
+    display: none;
+    content: none;
+}
+
+a:hover {
+    color: var(--hover-link-color); /* mörkt guldigt */
+}
+
+/* limit underline animation to non-logo, non-icon links */
+a:not(.logo a):not(.icon)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--hover-link-color); /* samma mörkt guldiga färg */
+    transition: width 0.3s ease;
+}
+
+a:not(.logo a):not(.icon):hover::after {
+    width: 100%;
+}
+
