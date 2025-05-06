@@ -2,6 +2,8 @@ section {
     height: 100vh;
 }
 
+/* === HERO SECTION === */
+
 .hero-section {
     padding: 5rem 0;
     height: 100vh;
@@ -12,7 +14,7 @@ section {
     margin: 0 -3rem;
     position: relative;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
 }
 
@@ -32,4 +34,47 @@ section {
 .hero-section * {
     position: relative;
     z-index: 2; /* Placerar innehållet ovanför det mörka överlägget */
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.hero-text-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10rem;
+}
+
+.hero-text {
+    font-size: 5rem;
+    color: var(--text-color);
+    margin: 0;
+    text-align: left;
+}
+
+
+.shop-now-button {
+    background-color: #B47C5400;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: fit-content;
+    border-radius: 8px;
+    border: 1px solid #B47C54;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.shop-now-button:hover {
+    background-color: #A06A4B;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.hero-image img {
+    transform: scale(1.2);
 }
