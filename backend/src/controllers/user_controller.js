@@ -1,16 +1,28 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
-const generateToken = (userId) => {
-    return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-};
+import { generateToken } from '../utils/jwt_token.js';
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         return res.status(400).json({ message: 'All fields are required' });
     }
+
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/; // Validating email format
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // Regex for password validation:
+    // - One letter
+    // - One number
+    // - One special character (t.ex. @, $, !, %, etc.)
+    // - Min 8 characters long
+    if (!passwordRegex.test(password)) {
+        return res.status(400).json({ message: 'Password must be at least 8 characters long, and include at least one letter, one number, and one special character' });
+    }
+
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -30,7 +42,7 @@ const registerUser = async (req, res) => {
         await newUser.save();
         res.status(201).json({ 
             message: 'User registered successfully', 
-            token: generateToken(newUser._id),
+            token: generateToken(newUser._id, newUser.user_id, newUser.email, newUser.isAdmin),
             user: {
                 username: newUser.username,
                 email: newUser.email
@@ -58,11 +70,11 @@ const loginUser = async (req, res) => {
         }
         res.status(200).json({ 
             message: 'Login successful', 
-            token: generateToken(user._id),
+            token: generateToken(user._id, user.user_id, user.email, user.isAdmin),
             user: {
                 username: user.username,
                 email: user.email
-            } 
+            }  
         });
     }
     catch (error) {
@@ -73,9 +85,30 @@ const loginUser = async (req, res) => {
 const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
+
+    if (req.user.user_id !== id) {
+        return res.status(403).json({ message: 'Access denied: You can only update your own profile' });
+    }
+
     if (!username || !email || !password) {
         return res.status(400).json({ message: 'All fields are required' });
     }
+
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/; // Validating email format
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // Regex for password validation:
+    // - One letter
+    // - One number
+    // - One special character (t.ex. @, $, !, %, etc.)
+    // - Min 8 characters long
+    if (!passwordRegex.test(password)) {
+        return res.status(400).json({ message: 'Password must be at least 8 characters long, and include at least one letter, one number, and one special character' });
+    }
+
     try {
         const user = await User.findOne({ user_id: id });
         if (!user) {
@@ -94,6 +127,11 @@ const updateUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { id } = req.params;
+
+    if (req.user.user_id !== id) {
+        return res.status(403).json({ message: 'Access denied: You can only update your own profile' });
+    }
+    
     try {
         const user = await User.findOne({ user_id: id }).select('-passwordHash');
         if (!user) {
