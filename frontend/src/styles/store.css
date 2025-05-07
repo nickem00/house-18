@@ -1,0 +1,32 @@
+.store {
+    display: flex;
+    gap: 2rem; 
+    padding: 2rem;
+  }
+
+.sidebar h4 {
+    color: white;
+    font-weight: 100;
+    display: inline-block;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.3rem;
+    padding-right: 6rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar {
+    margin-top: 10em;
+    font-family: var(--main-fonth);
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    color: #696767;
+}
+
+
+.product-grid-container{
+    margin-top: 10em;
+    font-family: var(--main-fonth);
+}
