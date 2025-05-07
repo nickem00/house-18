@@ -3,20 +3,16 @@ import '../styles/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
 import { useCart } from "../context/useCart";
-import { useNavigate } from "react-router-dom";
+import CartModal from "./CartModal";
 
 export default function Header() {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
-    const { hasItems, cartItems } = useCart();
-    const navigate = useNavigate();
+    const { cartItems } = useCart();
 
     const handleCartClick = () => {
-        if (hasItems) {
-            navigate('/cart');
-        } else {
-            alert('Your cart is empty!');
-        }
+        setIsCartOpen(!isCartOpen);
     };
 
     return (
@@ -64,6 +60,7 @@ export default function Header() {
                     </ul>
                 </nav>
             </div>
+            <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </header>
     );
 }
