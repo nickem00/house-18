@@ -9,6 +9,7 @@
 /* Ta bort padding här */
 html {
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 html, body {
