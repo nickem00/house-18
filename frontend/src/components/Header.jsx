@@ -2,9 +2,22 @@ import { Link } from "react-router-dom";
 import '../styles/header.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
+import { useCart } from "../context/useCart";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
+
+    const { hasItems, cartItems } = useCart();
+    const navigate = useNavigate();
+
+    const handleCartClick = () => {
+        if (hasItems) {
+            navigate('/cart');
+        } else {
+            alert('Your cart is empty!');
+        }
+    };
 
     return (
         <header>
@@ -29,9 +42,12 @@ export default function Header() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link className="icon" to="/cart">
+                                    <button className="icon cart-button" onClick={handleCartClick}>
                                         <FontAwesomeIcon icon={['fas', 'cart-shopping']} />
-                                    </Link>
+                                        {cartItems.length > 0 && (
+                                            <span className="cart-badge">{cartItems.length}</span>
+                                        )}
+                                    </button>
                                 </li>
                                 <li>
                                     <Link
