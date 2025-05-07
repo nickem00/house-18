@@ -1,24 +1,73 @@
-/* Footer styling som säkerställer att footern alltid är längst ner på sidan */
-
-footer {
-  margin-top: auto;
-  width: 100%;
-  background-color: #00000000;
-  padding: 1rem 0;
-}
-
-/* Behöver justeras på html och body för att få sticky footer att fungera */
-html, body, #root {
-  height: 100%;
-}
-
-#root {
+.footer-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  padding: 2rem;
+  border-top: 1px solid var(--accent-color);
+  border-radius: 40px 40px 0 0;
 }
 
-/* Ser till att main-innehållet tar upp tillgängligt utrymme */
-main {
-  flex: 1 0 auto;
+.footer-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.footer-logo h2 {
+  font-family: var(--logo-font);
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.footer-logo p {
+  font-size: 1rem;
+  font-weight: 200;
+  margin: 0.5rem 0 0 0;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 2rem;
+}
+
+.footer-column h4 {
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  border-bottom: 1px solid var(--text-color);
+  display: inline-block;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.footer-column li {
+  margin: 0.3rem 0;
+}
+
+.footer-column a {
+  color: var(--text-color);
+  text-decoration: none;
+  text-decoration: underline transparent;
+  transition: all 0.3s ease;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+  
+}
+
+.footer-bottom-text {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
 }

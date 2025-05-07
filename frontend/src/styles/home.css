@@ -1,4 +1,3 @@
-
 /* === HERO SECTION === */
 .hero-section {
     padding-top: 5rem;
@@ -217,4 +216,143 @@
     font-size: 1.3rem;
 }
 
+
+/* === Responsive (max-width: 768px) === */
+@media (max-width: 768px) {
+    /* HERO */
+    .hero-content {
+        flex-direction: column;       
+        padding: 1rem;          
+    }
+    .hero-text {
+        font-size: 2rem;           
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .hero-image img {
+        transform: scale(1);       
+        max-width: 100%;
+    }
+
+    .shop-now-button {
+        font-size: 1rem;               
+        padding: 0.5rem 1rem;          
+        margin: 2rem auto 1rem auto;
+    }
+
+    /* ABOUT STORE och ABOUT US */
+    .about-store-section,
+    .about-us-section {
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .about-store-text {
+        font-size: 1rem;              
+        text-align: center;
+        margin: 0 1rem;                 
+    }
+
+    .about-store-image-container,
+    .about-us-image-container {
+        gap: 2rem;                     
+        width: 70%;                    
+        margin: 0 auto;
+        flex-direction: row;
+    }
+
+
+    .about-store-image-card,
+    .about-us-image-card {
+        width: 100%;                   
+        max-width: 400px;              
+        height: auto;                  
+    }
+
+    /* 2x2 grid */
+    .about-us-image-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .about-us-image-card {
+        width: 100%; /* Ensure full width of the grid cell */
+        aspect-ratio: 3 / 4; /* Maintain a consistent aspect ratio */
+        height: auto; /* Adjust height automatically */
+    }
+
+    .about-us-image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensure images fill the card without distortion */
+    }
+
+    .about-store-image-card img,
+    .about-us-image-card img {
+        height: 100%;                  
+        object-fit: cover;             
+    }
+
+    .about-store-image-text,
+    .about-us-image-text {         
+        padding: 0.2rem;
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .about-us-image-text {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        
+    }
+
+    .about-us-image-text p:first-child,
+    .about-us-image-text p:last-child {
+        font-size: 1rem;
+    }
+
+    .about-store-title,
+    .about-us-title {
+        font-size: 2rem;               
+        margin: 0;
+    }
+
+    /* HEADER */
+    header .header-content {
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    header nav ul {
+        /* flex-direction: column; */
+        gap: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    /* CONTACT */
+    .contact-container {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .contact-info-text h2 {
+        font-size: 1.4rem !important; 
+    }
+
+    /* FOOTER */
+    footer p {
+        font-size: 0.9rem;             
+    }
+}
 
