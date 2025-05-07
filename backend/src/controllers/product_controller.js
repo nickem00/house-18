@@ -28,26 +28,26 @@ const createProduct = async (req, res) => {
     const { name, price, description, color, category, variants, images } = req.body;
   
     if (!req.user.isAdmin) {
-      return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
     if (!name || price == null || !description || !color || !category) {
-      return res.status(400).json({
-        message: 'Fälten name, price, description, color och category är obligatoriska'
-      });
+        return res.status(400).json({
+            message: 'Fälten name, price, description, color och category är obligatoriska'
+        });
     }
     if (typeof price !== 'number' || price < 0) {
-      return res.status(400).json({ message: 'Price must be a number ≥ 0' });
+        return res.status(400).json({ message: 'Price must be a number ≥ 0' });
     }
     if (!Array.isArray(variants) || !variants.length) {
-      return res.status(400).json({ message: 'Variants måste vara en icke-tom array' });
+        return res.status(400).json({ message: 'Variants måste vara en icke-tom array' });
     }
     if (!Array.isArray(images)) {
-      return res.status(400).json({ message: 'Images måste vara en array' });
+        return res.status(400).json({ message: 'Images måste vara en array' });
     }
     if (variants.some(v => !v.size || typeof v.stock !== 'number')) {
-      return res.status(400).json({
-        message: 'Varje variant måste ha size (string) och stock (number)'
-      });
+        return res.status(400).json({
+            message: 'Varje variant måste ha size (string) och stock (number)'
+        });
     }
   
     try {
