@@ -12,7 +12,7 @@
     border-radius: 10px;
     position: absolute;
     top: 80px;
-    right: 1.5rem;
+    right: 15rem;
     width: 320px;
     max-width: 90%;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
@@ -33,6 +33,8 @@
     list-style: none;
     padding: 0;
     margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-item-list li {
