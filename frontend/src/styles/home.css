@@ -1,24 +1,16 @@
-section {
-    height: 100vh;
-}
-
-/* === HERO SECTION === */
-
 .hero-section {
-    padding: 5rem 0 0 0;
+    padding-top: 5rem;
     height: 100vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1)), url(https://res.cloudinary.com/dzcqnchjm/image/upload/v1746553300/Backdrop-grey_1_rzbx3j.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0 -3rem;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-/* Overlay för att minska ljusstyrkan på bara bakgrundsbilden */
 .hero-section::before {
     content: "";
     position: absolute;
@@ -26,21 +18,22 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Justera opaciteten för att få önskad ljusstyrka */
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
-    pointer-events: none; /* Gör så att överlägget inte blockerar interaktioner */
+    pointer-events: none;
 }
 
 .hero-section * {
     position: relative;
-    z-index: 2; /* Placerar innehållet ovanför det mörka överlägget */
+    z-index: 2;
 }
 
 .hero-content {
     display: flex;
     align-items: center;
-    width: 70%;
     justify-content: space-between;
+    width: 80%;
+    padding: 0 3rem;
 }
 
 .hero-text-div {
@@ -55,7 +48,6 @@ section {
     margin: 0;
     text-align: left;
 }
-
 
 .shop-now-button {
     background-color: #B47C5400;
@@ -77,9 +69,4 @@ section {
 
 .hero-image img {
     transform: scale(1.2);
-}
-
-
-/* About store Section */
-.about-store-section {
 }

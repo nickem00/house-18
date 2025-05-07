@@ -6,8 +6,9 @@
     --accent-color: #A06A4B;
 }
 
+/* Ta bort padding här */
 html {
-    padding: 0 3rem;
+    padding: 0;
 }
 
 html, body {
@@ -15,10 +16,16 @@ html, body {
     min-height: 100vh; 
 }
 
-
-
 body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: var(--main-font);
+}
+
+/* Ny container-klass för gemensam padding */
+.container {
+    padding: 0 3rem;
+    max-width: 2000px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
