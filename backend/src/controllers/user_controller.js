@@ -1,6 +1,7 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils/jwt_token.js';
+import { getNextCustomUserId } from '../utils/getNextId.js';
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -29,10 +30,9 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const uCount = await User.countDocuments();
-        const customId = 'U' + (uCount + 1).toString().padStart(3, '0');
+        const nextId = await getNextCustomUserId();
         const newUser = new User({
-            user_id: customId,
+            user_id: nextId,
             username,
             email,
             passwordHash: hashedPassword,
