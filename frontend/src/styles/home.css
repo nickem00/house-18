@@ -93,8 +93,10 @@
 
 .about-store-image-container {
     display: flex;
-    gap: 30rem;
     margin-top: 5rem;
+    width: 80%;
+    max-width: 1200px;
+    justify-content: space-between;
 }
 
 .about-store-image-card {
@@ -103,7 +105,11 @@
     height: 480px;
     border-radius: 15px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
 
+.about-store-image-card:hover {
+    transform: scale(1.03);
 }
 
 .about-store-image-card img {
@@ -132,3 +138,83 @@
     gap: rem;
     font-size: 1.4rem;
 }
+
+/* === ABOUT US SECTION === */
+.about-us-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.about-us-title {
+    font-size: 3rem;
+    color: var(--text-color);
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 10rem 0;
+    letter-spacing: 2px;
+}
+
+.about-us-image-container {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.about-us-image-card {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.about-us-image-card:hover {
+    transform: scale(1.1);
+}
+
+.about-us-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.7);
+}
+
+.about-us-image-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.about-us-image-text {
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.about-us-image-text p {
+    margin: 0.3rem;
+}
+
+.about-us-image-text p:first-child {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.about-us-image-text p:last-child {
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+
+
