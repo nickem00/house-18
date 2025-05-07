@@ -350,6 +350,11 @@
         font-size: 1.4rem !important; 
     }
 
+    .cart-button {
+        font-size: 0.8rem;              
+        margin-top: -2px;
+    }
+
     /* FOOTER */
     footer p {
         font-size: 0.9rem;             

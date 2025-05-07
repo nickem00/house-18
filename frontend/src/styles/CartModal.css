@@ -1,0 +1,102 @@
+.cart-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+}
+
+.cart-modal {
+    background-color: rgb(39, 39, 39);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    position: absolute;
+    top: 80px;
+    right: 1.5rem;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.cart-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.cart-item-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding-bottom: 0.5rem;
+}
+
+.cart-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.checkout-button,
+.clear-cart-button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.checkout-button {
+    background-color: var(--accent-color);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #774e37;
+}
+
+.clear-cart-button {
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.3s ease;
+    border: 1px white solid;
+}
+
+.clear-cart-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.remove-item-button {
+    background: none;
+    border: none;
+    color: rgb(190, 190, 190);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.remove-item-button:hover {
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .cart-modal {
+        top: 60px;
+        right: 0.5rem;
+        width: 95%;
+    }
+}
