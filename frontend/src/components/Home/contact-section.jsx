@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 
 export default function ContactSection() {
+    const baseAPIUrl = import.meta.env.VITE_API_BASE_URL;
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,8 +33,27 @@ export default function ContactSection() {
         }
 
         setErrors({});
-        alert('Message sent!');
-        console.log("Send message placeholder (fetch):", formData);
+        
+        fetch(`${baseAPIUrl}/api/message`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Failed to send message');
+            }
+            return res.json();
+        })
+        .then(() => {
+            alert('Message sent!');
+        })
+        .catch(err => {
+            console.error("Error sending message:", err);
+            alert('Failed to send message. Please try again later.');
+        })
         
         setFormData({
             name: '',
