@@ -11,8 +11,8 @@ export default function Header() {
             <div className="container header-content">
                 <nav>
                     <ul>
-                        <li><Link to="/about">ABOUT US</Link></li>
-                        <li><Link to="/contact">CONTACT</Link></li>
+                        <li><Link to="/#about-store">ABOUT US</Link></li>
+                        <li><Link to="/#contact">CONTACT</Link></li>
                     </ul>
                 </nav>
 
