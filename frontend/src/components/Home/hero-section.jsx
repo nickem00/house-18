@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import '../../styles/home.css'
+import { Link } from "react-router-dom";
+import '../../styles/home.css';
 
 export default function HeroSection() {
     return (
@@ -15,5 +15,5 @@ export default function HeroSection() {
                 </div>
             </div>
         </section>
-    )
+    );
 }
