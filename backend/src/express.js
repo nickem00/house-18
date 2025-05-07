@@ -3,6 +3,7 @@ import cors from "cors";
 import userRoutes from "./routes/user_routes.js";
 import productRoutes from "./routes/product_routes.js";
 import messagesRoutes from "./routes/messages_routes.js";
+import order_routes from "./routes/order_routes.js";
 
 // Import routes
 // import userRoutes from "./routes/user.js"; (EXAMPLE)
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/", userRoutes); // User routes
 app.use("/", productRoutes); // Product routes
 app.use("/", messagesRoutes); // Messages routes
+app.use("/", order_routes); // Order routes
 
 // Example route for testing
 app.get("/", (req, res) => {
