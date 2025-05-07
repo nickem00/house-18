@@ -5,7 +5,7 @@ section {
 /* === HERO SECTION === */
 
 .hero-section {
-    padding: 5rem 0;
+    padding: 5rem 0 0 0;
     height: 100vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1)), url(https://res.cloudinary.com/dzcqnchjm/image/upload/v1746553300/Backdrop-grey_1_rzbx3j.png);
     background-size: cover;
@@ -77,4 +77,9 @@ section {
 
 .hero-image img {
     transform: scale(1.2);
+}
+
+
+/* About store Section */
+.about-store-section {
 }
