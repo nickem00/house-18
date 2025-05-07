@@ -338,6 +338,18 @@
         font-size: 2rem;
     }
 
+    /* CONTACT */
+    .contact-container {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .contact-info-text h2 {
+        font-size: 1.4rem !important; 
+    }
+
     /* FOOTER */
     footer p {
         font-size: 0.9rem;             
