@@ -87,12 +87,13 @@ const updateProduct = async (req, res) => {
     const allowed = (({ name, price, description, color, category, variants, images }) =>
         ({ name, price, description, color, category, variants, images }))(req.body);
   
-    // Admin check ...
-    // Validation of price, variants, etc ...
+    if (!req.user.isAdmin) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
   
     try {
         const product = await Product.findOneAndUpdate(
-            { product_id: productId },            // filter on custom field
+            { product_id: productId },
             { ...allowed, updatedAt: Date.now() },
             { new: true, runValidators: true }
         );
