@@ -25,6 +25,10 @@
     color: #696767;
 }
 
+.sidebar ul li {
+    margin-bottom: -0.5rem;
+}
+
 
 .product-grid-container{
     margin-top: 10em;
