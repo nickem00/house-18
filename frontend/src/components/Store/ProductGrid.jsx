@@ -1,7 +1,11 @@
-export default function ProductGrid(){
+import ProductCard from "./ProductCard";
+
+export default function ProductGrid({products}){
     return(
-        <div className="product-grid-container">
-            
-        </div>
+        <section className="product-grid-container">
+            {products.map((product)=> {
+                return <ProductCard key={product._id} product={product} />
+            })}
+        </section>
     )
 }

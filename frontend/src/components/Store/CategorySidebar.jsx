@@ -11,7 +11,7 @@ export default function CategorySidebar(){
             <h4>CATEGORIES</h4>
             <ul>
                 {categories.map((c)=>(
-                    <li>
+                    <li key={c.name}>
                         {c.name} <span>({c.count})</span>
                     </li>
                 ))}

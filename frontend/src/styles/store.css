@@ -2,11 +2,12 @@
     display: flex;
     gap: 2rem; 
     padding: 2rem;
+    align-items: flex-start;
   }
 
 .sidebar h4 {
     color: white;
-    font-weight: 100;
+    font-weight: 300;
     display: inline-block;
     border-bottom: 1px solid #444;
     padding-bottom: 0.3rem;
@@ -34,3 +35,18 @@
     margin-top: 10em;
     font-family: var(--main-fonth);
 }
+
+.product-grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    flex: 1;
+  }
+  
+
+.product-img{  
+  width: 200px;
+  height: auto;
+}
+  
