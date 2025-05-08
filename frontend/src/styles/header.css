@@ -1,16 +1,16 @@
 header {
     background-color: #00000000;
-    position: absolute; /* Ändra till fixed om vi vill att den ska följa med */
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 6rem); /* adjusting with the padding of html */
-    box-sizing: border-box;
-    /* left: 3rem; 
-    right: 3rem;  */
+    position: absolute;
+    width: 100%;
     top: 0;
-    align-items: baseline;
     z-index: 1000;
     margin-top: 1rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
@@ -36,7 +36,6 @@ a {
     padding-bottom: 2px;
 }
 
-/* Exkludera länken inuti logotypen från hover-effekt */
 .logo a, .logo a:hover {
     color: var(--text-color);
 }
@@ -45,23 +44,20 @@ a {
     display: none;
 }
 
-/* hide pseudo-element on icon links */
 a.icon::after {
     display: none;
     content: none;
 }
-
 
 a:not(.logo a):not(.icon):hover::after {
     width: 100%;
 }
 
 header nav a:hover {
-    color: var(--hover-link-color); /* mörkt guldigt */
+    color: var(--accent-color);
     transition: all 0.3s ease;
 }
 
-/* Begränsa underline-animationen till navigationslänkar i headern */
 header nav a::after {
     content: '';
     position: absolute;
@@ -69,7 +65,7 @@ header nav a::after {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--hover-link-color); /* samma mörkt guldiga färg */
+    background-color: var(--accent-color);
     transition: all 0.3s ease;
 }
 
@@ -77,3 +73,32 @@ header nav a:hover::after {
     width: 100%;
 }
 
+/* === Cart === */
+.cart-button {
+    position: relative;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    font-size: 1rem;
+}
+
+.cart-button:hover {
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
