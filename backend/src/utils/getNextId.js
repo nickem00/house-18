@@ -43,3 +43,5 @@ export async function getNextCustomOrderId() {
 
     return 'O' + nextNum.toString().padStart(3, '0');
 };
+
+// They all looks up the highest id in the database, increments it by 1 and returns it as a string with a prefix (P, U, O) and zero-padded to 3 digits.

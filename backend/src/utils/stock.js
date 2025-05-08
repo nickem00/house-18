@@ -1,5 +1,6 @@
 import Product from '../models/product.js';
 
+// Check stock for a specific product and size if the product is out of stock
 export const checkStock = async (product_id, quantity, size) => {
     const product = await Product.findOne({ product_id: product_id });
     if (!product) {
@@ -8,16 +9,17 @@ export const checkStock = async (product_id, quantity, size) => {
 
     const variant = product.variants.find(v => v.size === size);
     if (!variant) {
-        throw new Error('Size not found in product variants');
+        return false; // Size not found
     }
 
     if (variant.stock < quantity) {
-        throw new Error('Insufficient stock for the requested size');
+        return false; // Not enough stock
     }
 
     return true;
 };
 
+// Decrement stock for a specific product and size
 export async function decrementStock(productId, size, quantity) {
     const product = await Product.findOne({ product_id: productId });
     if (!product) {
@@ -26,7 +28,7 @@ export async function decrementStock(productId, size, quantity) {
   
     const variant = product.variants.find(v => v.size === size);
     if (!variant) {
-        throw new Error(`Size ${size} not found for product ${productId}`);
+        return(`Size ${size} not found for product ${productId}`);
     }
   
     if (variant.stock < quantity) {
@@ -36,6 +38,5 @@ export async function decrementStock(productId, size, quantity) {
     }
   
     variant.stock -= quantity;
-    // Spara ändringarna
     await product.save();
 }
