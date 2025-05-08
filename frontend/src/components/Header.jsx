@@ -3,12 +3,9 @@ import '../styles/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
 import { useCart } from "../context/useCart";
-import CartModal from "./CartModal";
 
-export default function Header() {
+export default function Header({ setIsCartOpen, isCartOpen }) {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false);
-
     const { cartItems } = useCart();
 
     const handleCartClick = () => {
@@ -60,7 +57,6 @@ export default function Header() {
                     </ul>
                 </nav>
             </div>
-            <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </header>
     );
 }
