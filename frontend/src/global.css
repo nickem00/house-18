@@ -18,7 +18,18 @@ html, body {
 }
 
 body {
-    background-color: var(--background-color);
+    
+    background-color: #000000;
+    background-image:
+        radial-gradient(circle at -10% 30%, rgba(20,20,20,1) 0%, transparent 40%),
+        radial-gradient(circle at 110% 60%, rgb(32, 32, 32) 0%, transparent 40%),
+        radial-gradient(circle at -10% 100%, rgba(20,20,20,1) 0%, transparent 40%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: scroll;
+    color: var(--text-color);
+    font-family: var(--main-font);
+      
     color: var(--text-color);
     font-family: var(--main-font);
 }

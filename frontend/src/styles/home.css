@@ -74,6 +74,7 @@
 
 /* === ABOUT THE STORE SECTION === */
 .about-store-section {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 50%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -246,6 +247,8 @@
     }
 
     /* ABOUT STORE och ABOUT US */
+
+
     .about-store-section,
     .about-us-section {
         align-items: center;
