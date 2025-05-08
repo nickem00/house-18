@@ -216,6 +216,11 @@
     font-size: 1.3rem;
 }
 
+.add-to-cart-button {
+    position: absolute;
+    top: 300px;
+}
+
 
 /* === Responsive (max-width: 768px) === */
 @media (max-width: 768px) {

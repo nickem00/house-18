@@ -1,0 +1,203 @@
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: 0rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkout-container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.checkout-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.checkout-left-shipping {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-shipping-form,
+.shipping-method-form,
+.payment-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-shipping-form input,
+.payment-details-form input {
+    background-color: #222;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 0.75rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.contact-shipping-form input:focus,
+.payment-details-form input:focus,
+.contact-shipping-form input:hover,
+.payment-details-form input:hover {
+    border: 1px solid var(--accent-color);
+    outline: none;
+}
+
+.contact-shipping-form div {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#shipping-postal-code,
+#shipping-country {
+    width: 44%;
+
+    
+}
+
+.shipping-method-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.shipping-method-form label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.shipping-method-type {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: #222;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.shipping-method-type:hover {
+    border: 1px solid var(--accent-color);
+}
+
+.payment-details-form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-details-form div input {
+    width: 44%;
+}
+
+.checkout-order-button {
+    margin-top: 0rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--accent-color);
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-weight: 600;
+}
+
+.checkout-order-button:hover {
+    background-color: var(--accent-color);
+}
+
+/* == ORDER SUMMARY == */
+.checkout-right-summary {
+    margin-top: 68.84px;
+    background-color: #202020;
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 300px;
+    width: 100%;
+    height: fit-content;
+}
+
+.checkout-right-summary h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+    padding: 0rem 0;
+    color: #818181;
+    font-size: 0.95rem;
+}
+
+.checkout-summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    color: #818181;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
+}
+
+.checkout-summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+        height: auto;
+        padding-top: 5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        box-sizing: border-box;
+    }
+    .checkout-flex-container {
+        flex-direction: column-reverse;
+        align-items: center;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 8rem;
+    }
+    
+    .checkout-right-summary {
+        width: calc(100% - 2rem);
+        max-width: 100%;
+        margin-top: 2rem;
+        box-sizing: border-box;
+        background-color: transparent;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 10px rgba(100, 100, 100, 0.308);
+    }
+
+    .contact-shipping-form div,
+    .payment-details-form div {
+        gap: 1rem;
+    }
+}
