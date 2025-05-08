@@ -1,8 +1,10 @@
 import { useCart } from "../context/useCart";
 import '../styles/Checkout.css';
+import { useState } from "react";
 
 export default function Checkout() {
     const { cartItems } = useCart();
+    const [ shippingCost, setShippingCost ] = useState(49);
 
     return (
         <div className="checkout-container">
@@ -28,14 +30,25 @@ export default function Checkout() {
                         <h2>Shipping Method</h2>
                         <form className="shipping-method-form">
                             <label>
-                                <input type="radio" name="shipping-method" value="standard" defaultChecked />
+                                <input 
+                                    type="radio" 
+                                    name="shipping-method" 
+                                    value="standard" 
+                                    defaultChecked
+                                    onChange={() => setShippingCost(49)} 
+                                />
                                 <p className="shipping-method-type">
                                     Standard Shipping
                                     <span className="shipping-method-price">49kr</span>
                                 </p>
                             </label>
                             <label>
-                                <input type="radio" name="shipping-method" value="express" />
+                                <input 
+                                    type="radio" 
+                                    name="shipping-method" 
+                                    value="express"
+                                    onChange={() => setShippingCost(99)} 
+                                />
                                 <p className="shipping-method-type">
                                     Express Shipping
                                     <span className="shipping-method-price">99kr</span>
@@ -70,12 +83,12 @@ export default function Checkout() {
                         
                             <div className="checkout-summary-line">
                                 <p>Shipping</p>
-                                <p>49 kr</p>
+                                <p>{shippingCost} kr</p>
                             </div>
                             <div className="checkout-summary-total">
                                 <p>Total</p>
                                 <p>
-                                    {cartItems.reduce((sum, item) => sum + item.price, 0) + 49} kr
+                                    {cartItems.reduce((sum, item) => sum + item.price, 0) + shippingCost} kr
                                 </p>
                             </div>
                         </>
