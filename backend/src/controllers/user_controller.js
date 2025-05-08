@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils/jwt_token.js';
 import { getNextCustomUserId } from '../utils/getNextId.js';
 
+// Register user
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
@@ -42,7 +43,7 @@ const registerUser = async (req, res) => {
         await newUser.save();
         res.status(201).json({ 
             message: 'User registered successfully', 
-            token: generateToken(newUser._id, newUser.user_id, newUser.email, newUser.isAdmin),
+            token: generateToken(newUser._id, newUser.user_id, newUser.email, newUser.isAdmin), // Generate JWT token and include username and email
             user: {
                 username: newUser.username,
                 email: newUser.email
@@ -54,6 +55,7 @@ const registerUser = async (req, res) => {
     }
 };
 
+// Login user
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -82,6 +84,7 @@ const loginUser = async (req, res) => {
     }
 };
 
+// Update user profile
 const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
@@ -125,6 +128,7 @@ const updateUser = async (req, res) => {
     }
 };
 
+// Get user by ID
 const getUser = async (req, res) => {
     const { id } = req.params;
 

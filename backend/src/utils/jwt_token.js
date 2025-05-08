@@ -11,6 +11,8 @@ const generateToken = (id, userId, email, isAdmin) => {
     { expiresIn: '1h' });
 };
 
+// Middleware to verify JWT token
+// This middleware checks if the token is valid and if so, it adds the decoded user information to the request object
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
@@ -23,10 +25,9 @@ const verifyToken = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        // Lägg till detaljerad felinformation för att hjälpa felsökning
         return res.status(400).json({ 
             message: 'Invalid token.',
-            error: error.message  // Visa specifika felmeddelanden från jwt-verifieringen
+            error: error.message
         });
     }
 };

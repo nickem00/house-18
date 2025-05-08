@@ -1,5 +1,6 @@
 import Message from '../models/message.js';
 
+// Create a new message
 const createMessage = async (req, res) => {
     const { name, email, subject, message } = req.body;
     if (!name || !email || !subject || !message) {
