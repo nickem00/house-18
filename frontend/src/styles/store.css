@@ -5,14 +5,23 @@
     align-items: flex-start;
   }
 
-.sidebar h4 {
+.all-categories-btn {
     color: white;
     font-weight: 300;
+    font-size: 16px;
     display: inline-block;
     border-bottom: 1px solid #444;
     padding-bottom: 0.3rem;
     padding-right: 6rem;
     margin-bottom: 1rem;
+    background: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+
+.all-categories-btn:hover{
+  cursor: pointer;
 }
 
 .sidebar {
@@ -24,6 +33,19 @@
     display: flex;
     flex-direction: column;
     color: #696767;
+    font-size: 15px;
+}
+
+.category-btn{
+  color: #696767;
+  font-family: var(--main-fonth);
+  background:none;
+  border:none;
+  font-size: 15px;
+}
+
+.category-btn:hover{
+  cursor: pointer;
 }
 
 .sidebar ul li {
@@ -48,7 +70,7 @@
   position: relative;
   width: 200px;
   height: auto;
-  aspect-ratio: 2.5 / 4; /* Behåller snygg höjd-bredd oavsett bild */
+  aspect-ratio: 2.5 / 4; /* Keeps heigh/width ratio */
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -85,4 +107,5 @@
 
 .product-image-container:hover {
   transform: scale(1.03);
+  cursor: pointer;
 }
