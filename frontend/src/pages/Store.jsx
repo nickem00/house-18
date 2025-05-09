@@ -31,8 +31,8 @@ export default function Store() {
 
     return(
         <div className="store">
-            <CategorySidebar categoryCounts={categoryCounts} onCategorySelect={setSelectedCategory}/>
-            <ProductGrid products={products} />
+            <CategorySidebar categoryCounts={categoryCounts} categorySelect={setSelectedCategory}/>
+            <ProductGrid products={filteredProducts} />
         </div>
     );
 }
