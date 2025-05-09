@@ -1,13 +1,14 @@
-export default function CategorySidebar({ categoryCounts}){
+export default function CategorySidebar({ categoryCounts, categorySelect}){
     const categories = ["T-shirts", "Accessories", "Pants", "Shirts"];
 
     return (
         <aside className="sidebar">
-            <h4>CATEGORIES</h4>
+            <button className="all-categories-btn" onClick={()=> categorySelect(null)}>CATEGORIES</button>
             <ul>
                 {categories.map((category)=>(
                     <li key={category}>
-                        {category} <span>({categoryCounts[category] || 0})</span>
+                       <button className="category-btn" onClick={()=>categorySelect(category)}
+                       >{category}</button><span>({categoryCounts[category] || 0})</span>
                     </li>
                 ))}
             </ul>
