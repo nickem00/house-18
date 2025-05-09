@@ -116,7 +116,7 @@
   border: 1px solid var(--accent-color);
   border-radius: 24px;
   background: transparent;
-  color: var(--text-color);
+  color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
@@ -128,20 +128,28 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
+  /* definiera både durationer och (som default) noll delay */
   transition: 
-    max-height 1s ease,
-    opacity     1s ease;
-}
-
-.fields.show {
-  max-height: 556px;
-  opacity: 1;
+    max-height 0.6s ease 0s, 
+    opacity     0.6s ease 0s;
 }
 
 .fields.hide {
+  /* fade-out börjar direkt */
   max-height: 0;
   opacity: 0;
+  /* explicit noll delay (valfritt, men tydligt) */
+  transition-delay: 0s, 0s;
 }
+
+.fields.show {
+  /* fade-in sker, men först efter att fade-out hunnit klart */
+  max-height: 556px;
+  opacity: 1;
+  /* samma delay som exit-duration (1s) */
+  transition-delay: 0.6s, 0.6s;
+}
+
 
 .fade-enter {
   opacity: 0;
@@ -169,6 +177,9 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .login-register-container {
+    margin-top: 7rem;
+  }
   .login-register-form {
     padding: 1.5rem;
     width: 100%;
