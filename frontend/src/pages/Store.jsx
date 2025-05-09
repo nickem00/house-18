@@ -8,6 +8,7 @@ export default function Store() {
     const URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     const [products, setProducts] = useState([]);
     const [categoryCounts, setCategoryCounts] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(()=> {
         fetch(`${URL}/products`)
@@ -21,10 +22,17 @@ export default function Store() {
 
     }, []);
 
+    let filteredProducts = products;
+
+    if (selectedCategory){
+        filteredProducts = products.filter(
+            (product) => product.category === selectedCategory);
+    }
+
     return(
         <div className="store">
-            <CategorySidebar categoryCounts={categoryCounts}/>
-            <ProductGrid products={products} />
+            <CategorySidebar categoryCounts={categoryCounts} categorySelect={setSelectedCategory}/>
+            <ProductGrid products={filteredProducts} />
         </div>
     );
 }
