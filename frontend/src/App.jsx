@@ -5,8 +5,10 @@ import ScrollToHashElement from "./features/ScrollToHashElement";
 import CartModal from "./components/CartModal";
 import ThemeToggle from "./components/ThemeToggle";
 import { useState } from "react";
+import { useAutoLogout } from "./features/useAutoLogout";
 
 export default function App() {
+  useAutoLogout(); // Feature to manage session timeout
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   return (

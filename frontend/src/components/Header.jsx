@@ -8,6 +8,8 @@ export default function Header({ setIsCartOpen, isCartOpen }) {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
     const { cartItems } = useCart();
 
+    const token = localStorage.getItem("token");
+
     const handleCartClick = () => {
         setIsCartOpen(!isCartOpen);
     };
@@ -30,7 +32,7 @@ export default function Header({ setIsCartOpen, isCartOpen }) {
                         <li>
                             <ul className="icons-list">
                                 <li>
-                                    <Link className="icon" to="/profile">
+                                    <Link className="icon" to={token ? "/Profile" : "/Login-Register"}>
                                         <FontAwesomeIcon icon={['far', 'user']} />
                                     </Link>
                                 </li>
