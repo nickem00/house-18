@@ -55,38 +55,38 @@ export default function LoginRegister() {
     }
 
     try {
-      const url = mode === "login" ? "http://localhost:5000/api/users/login" : "http://localhost:5000/api/users/register";
-      const payload =
-        mode === "login"
-          ? { email: formData.email, password: formData.password }
-          : {
-              username: formData.username,
-              email: formData.email,
-              password: formData.password,
-            };
+          const url = mode === "login" ? `${import.meta.env.VITE_API_BASE_URL}/api/users/login` : `${import.meta.env.VITE_API_BASE_URL}/api/users/register`;
+          const payload =
+            mode === "login"
+              ? { email: formData.email, password: formData.password }
+              : {
+                  username: formData.username,
+                  email: formData.email,
+                  password: formData.password,
+                };
 
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json();
 
-      if (!res.ok) {
-        setErrors({ general: data.message || "Something went wrong!" });
-        return;
+          if (!res.ok) {
+            setErrors({ general: data.message || "Something went wrong!" });
+            return;
+          }
+
+          // Save token and user info in local storage
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("loggedIn", "true");
+
+          // Navigate to the home page
+          navigate("/");
+      } catch (err) {
+          console.error(err);
+          setErrors({ general: "Could not reach the server!" });
       }
-
-      // Save token and user info in local storage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("loggedIn", "true");
-
-      // Navigate to the home page
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-      setErrors({ general: "Could not reach the server!" });
-    }
   };
 
   return (
