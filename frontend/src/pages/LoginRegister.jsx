@@ -28,13 +28,19 @@ export default function LoginRegister() {
 
   const validate = () => {
     const errs = {};
+    // Email validering alltid
     if (!emailRegex.test(formData.email)) {
       errs.email = "Enter a valid email address.";
     }
-    if (!passwordRegex.test(formData.password)) {
+
+    // Lösenord – krävs alltid, men struktur bara på register
+    if (!formData.password) {
+      errs.password = "Enter a password.";
+    } else if (mode === "register" && !passwordRegex.test(formData.password)) {
       errs.password =
         "Password must be at least 8 characters long, and include at least one letter, one number, and one special character.";
     }
+
     if (mode === "register") {
       if (!formData.username.trim()) {
         errs.username = "Enter a username.";
@@ -43,51 +49,74 @@ export default function LoginRegister() {
         errs.confirmPassword = "Passwords do not match.";
       }
     }
+
     return errs;
-  };
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length) {
-      setErrors(validationErrors);
-      return;
-    }
 
-    try {
-          const url = mode === "login" ? `${import.meta.env.VITE_API_BASE_URL}/api/users/login` : `${import.meta.env.VITE_API_BASE_URL}/api/users/register`;
-          const payload =
-            mode === "login"
-              ? { email: formData.email, password: formData.password }
-              : {
-                  username: formData.username,
-                  email: formData.email,
-                  password: formData.password,
-                };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const validationErrors = validate();
+      if (Object.keys(validationErrors).length) {
+        setErrors(validationErrors);
+        return;
+      }
 
-          const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-          const data = await res.json();
+      try {
+        const url =
+          mode === "login"
+            ? `${import.meta.env.VITE_API_BASE_URL}/api/users/login`
+            : `${import.meta.env.VITE_API_BASE_URL}/api/users/register`;
+        const payload =
+          mode === "login"
+            ? { email: formData.email, password: formData.password }
+            : {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+              };
 
-          if (!res.ok) {
-            setErrors({ general: data.message || "Something went wrong!" });
-            return;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          const msg = data.message || "Something went wrong!";
+          const newErrors = {};
+
+          // Skicka e-post-relaterade fel under email
+          if (msg.toLowerCase().includes("email")) {
+            newErrors.email = msg;
+          }
+          // Skicka lösenords- eller credentials-fel under password
+          else if (
+            msg.toLowerCase().includes("password") ||
+            msg.toLowerCase().includes("credentials")
+          ) {
+            newErrors.password = msg;
+          }
+          // Annars behåll som general (t.ex. serverfel)
+          else {
+            newErrors.general = msg;
           }
 
-          // Save token and user info in local storage
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("loggedIn", "true");
+          setErrors(newErrors);
+          return;
+        }
 
-          // Navigate to the home page
-          navigate("/");
+        // Om OK: spara och navigera
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("loggedIn", "true");
+        navigate("/");
       } catch (err) {
-          console.error(err);
-          setErrors({ general: "Could not reach the server!" });
+        // Nätverks/servern nere → general
+        setErrors({ general: "Could not reach the server!" });
       }
   };
+
 
   return (
     <div className="login-register-container">
