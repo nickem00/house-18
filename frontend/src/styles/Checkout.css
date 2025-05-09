@@ -4,7 +4,8 @@
     height: 100vh;
     padding-top: 0rem;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
+    margin-top: 10rem;
 }
 
 .checkout-container h1 {
@@ -185,6 +186,7 @@
         padding-left: 1rem;
         padding-right: 1rem;
         box-sizing: border-box;
+        margin-top: 2rem;
     }
     .checkout-flex-container {
         flex-direction: column-reverse;
