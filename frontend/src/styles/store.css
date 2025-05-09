@@ -48,6 +48,11 @@
   cursor: pointer;
 }
 
+.category-btn:focus{
+  color: white;
+  transition: all 0.3s ease;
+}
+
 .sidebar ul li {
     margin-bottom: -0.5rem;
 }
@@ -108,4 +113,27 @@
 .product-image-container:hover {
   transform: scale(1.03);
   cursor: pointer;
+}
+
+.product-description{
+  font-weight: 200;
+  font-size: 13px;
+  max-width: 200px;
+  color: #696767;
+}
+
+.product-description:hover {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.product-name {
+  max-width: 200px;
+  margin-bottom: -0.6em;
+  font-weight: 300;
+}
+
+.product-price{
+  max-width: 200px;
+  font-weight: 300;
 }
