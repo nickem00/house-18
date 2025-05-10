@@ -1,5 +1,6 @@
 import ProductImages from "../components/ProductPage/ProductImages";
 import ProductInfo from "../components/ProductPage/ProductInfo";
+import "../styles/ProductPage.css"
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
