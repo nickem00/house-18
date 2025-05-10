@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Store from "./pages/Store";
 import Checkout from "./pages/Checkout";
+import ProductPage from "./pages/ProductPage";
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
             { path: "/checkout", element: <Checkout /> },
             { path: "*", element: <NotFound /> },
             { path: "Store", element: <Store /> },
+            { path: "products/:id", element: <ProductPage />},
         ],
     },
 ]);

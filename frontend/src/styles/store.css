@@ -123,6 +123,7 @@
   max-width: 200px;
   color: #696767;
   transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
 .product-description:hover {
@@ -131,9 +132,11 @@
 }
 
 .product-name {
+  display: inline-block;
   max-width: 200px;
-  margin-bottom: -0.6em;
   font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .product-price{
