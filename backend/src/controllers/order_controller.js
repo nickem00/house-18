@@ -6,11 +6,12 @@ import { getNextCustomOrderId } from '../utils/getNextId.js';
 
 // Create a new order
 const createOrder = async (req, res) => {
-    const { user_id, products, status } = req.body;
+    const { products, status } = req.body;
+    const user_id = req.user.user_id;
 
 
-    if (!user_id || !Array.isArray(products) || products.length === 0) {
-        return res.status(400).json({ message: 'All fields are required' });
+    if (!Array.isArray(products) || products.length === 0) {
+        return res.status(400).json({ message: 'Products array cannot be empty' });
     }
     if (typeof products !== 'object' || !Array.isArray(products)) {
         return res.status(400).json({ message: 'Products should be an array' });
