@@ -30,7 +30,7 @@ export default function Checkout() {
         }
         
 
-        const result = await createOrder(cartItems);
+        const result = await createOrder(cartItems, shippingCost);
 
         if (result.error) {
             alert(result.error);

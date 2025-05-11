@@ -1,6 +1,6 @@
 const baseAPIUrl = import.meta.env.VITE_API_BASE_URL;
 
-export async function createOrder(cartItems) {
+export async function createOrder(cartItems, shippingCost) {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -20,7 +20,7 @@ export async function createOrder(cartItems) {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify({ products })
+            body: JSON.stringify({ products, shippingCost })
         });
 
         const data = await res.json();
