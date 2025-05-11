@@ -118,7 +118,7 @@
   cursor: pointer;
 }
 
-.product-description{
+/*.product-description{
   font-weight: 200;
   font-size: 13px;
   max-width: 200px;
@@ -130,6 +130,12 @@
 .product-description:hover {
   color: white;
   transition: all 0.3s ease;
+}*/
+
+.product-brand {
+  margin-top: 0.3em;
+  font-size: 13px;
+  color: #696767;
 }
 
 .product-name {
