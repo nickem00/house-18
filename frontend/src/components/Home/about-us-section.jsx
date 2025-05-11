@@ -14,7 +14,7 @@ export default function AboutUsSection() {
                 <TeamCard 
                     name="Hugo" 
                     role="Feature Developer Coordinator" 
-                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/v1746616899/Screenshot_2025-05-02_182649_vwyavk.png" 
+                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/v1746993763/FB_IMG_1746274068933_cvlwfz.jpg" 
                 />
                 <TeamCard 
                     name="Jacob" 
