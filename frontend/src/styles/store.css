@@ -26,7 +26,7 @@
 
 .sidebar {
     margin-top: 10em;
-    font-family: var(--main-fonth);
+    font-family: var(--main-font);
 }
 
 .sidebar ul {
@@ -38,14 +38,21 @@
 
 .category-btn{
   color: #696767;
-  font-family: var(--main-fonth);
+  font-family: var(--main-font);
   background:none;
   border:none;
   font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .category-btn:hover{
   cursor: pointer;
+  
+}
+
+.category-btn:focus{
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .sidebar ul li {
@@ -60,7 +67,7 @@
 
 .product-grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 2rem;
     padding: 2rem;
     flex: 1;
@@ -83,6 +90,7 @@
   top: 0;
   left: 0;
   transition: opacity 0.5s ease;
+  border-radius: 10px;
 }
 
 .main-img {
@@ -108,4 +116,37 @@
 .product-image-container:hover {
   transform: scale(1.03);
   cursor: pointer;
+}
+
+/*.product-description{
+  font-weight: 200;
+  font-size: 13px;
+  max-width: 200px;
+  color: #696767;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.product-description:hover {
+  color: white;
+  transition: all 0.3s ease;
+}*/
+
+.product-brand {
+  margin-top: 0.3em;
+  font-size: 13px;
+  color: #696767;
+}
+
+.product-name {
+  display: inline-block;
+  max-width: 200px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.product-price{
+  max-width: 200px;
+  font-weight: 300;
 }

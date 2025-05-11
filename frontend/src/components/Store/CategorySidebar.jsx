@@ -8,7 +8,7 @@ export default function CategorySidebar({ categoryCounts, categorySelect}){
                 {categories.map((category)=>(
                     <li key={category}>
                        <button className="category-btn" onClick={()=>categorySelect(category)}
-                       >{category}</button><span>({categoryCounts[category] || 0})</span>
+                       >{category} <span>({categoryCounts[category] || 0})</span></button>
                     </li>
                 ))}
             </ul>

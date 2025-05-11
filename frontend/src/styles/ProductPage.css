@@ -1,0 +1,117 @@
+.product-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem;
+  font-family: var(--main-font);
+  font-size: 18px;
+}
+
+.product-images {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 10rem;
+  margin-left: 6rem;
+  flex-wrap: wrap;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.thumbnails img {
+  width: 194px;
+  height: auto;
+  object-fit: cover;
+  background: linear-gradient(#424242, #ffffff);
+  opacity: 50%;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.thumbnails img.active {
+  opacity: 100%;
+  transition: all 0.3s ease;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.03);
+}
+
+.main-image img {
+  width: 400px;
+  background: linear-gradient(#424242, #ffffff);
+  border-radius: 10px;
+}
+
+.product-info {
+  margin-top: 10rem;
+  font-family: var(--main-font)
+}
+
+.product-title {
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+.add-to-cart-btn {
+    background-color: #A06A4B; 
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: 25em;
+    border-radius: 8px;
+    border: 1px solid #B47C54;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #B47C5400;
+    border: 1px solid #B47C54;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.product-actions {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.size-menu {
+    background-color: #B47C5400;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: 25em;
+    border-radius: 8px;
+    border: 1px solid #ffffff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.size-menu option {
+  background-color: var(--background-color);
+  border: 1px solid #B47C54;
+}
+
+.size-menu:hover {
+  cursor: pointer;
+}
+
+.shipping-and-details {
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.productSite-description {
+  max-width: 25em;
+  font-weight: 200;
+}
