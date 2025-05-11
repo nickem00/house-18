@@ -6,11 +6,16 @@ import { getNextCustomOrderId } from '../utils/getNextId.js';
 
 // Create a new order
 const createOrder = async (req, res) => {
-    const { user_id, products, status } = req.body;
+    let { products, shippingCost = 0, status } = req.body;
+    const user_id = req.user.user_id;
 
+    shippingCost = Number(shippingCost);
 
-    if (!user_id || !Array.isArray(products) || products.length === 0) {
-        return res.status(400).json({ message: 'All fields are required' });
+    if (isNaN(shippingCost) || shippingCost < 0) {
+        return res.status(400).json({ message: 'Shipping cost should be a non-negative number' });
+    }
+    if (!Array.isArray(products) || products.length === 0) {
+        return res.status(400).json({ message: 'Products array cannot be empty' });
     }
     if (typeof products !== 'object' || !Array.isArray(products)) {
         return res.status(400).json({ message: 'Products should be an array' });
@@ -41,6 +46,7 @@ const createOrder = async (req, res) => {
             }
         }
     
+        // Count total price
         let total = 0;
     
         const mappedItems = await Promise.all(products.map(async ({ product_id, size, quantity }) => {
@@ -56,6 +62,9 @@ const createOrder = async (req, res) => {
                 quantity
             };
         }));
+
+        // Add shipping cost to total
+        total += shippingCost;
     
         const user = await User.findOne({ user_id });
         if (!user) {
@@ -67,6 +76,7 @@ const createOrder = async (req, res) => {
             order_id: nextId,
             user_id: user._id,
             items: mappedItems,
+            shippingCost,
             total: total,
             status: status || 'pending',
             createdAt: new Date()

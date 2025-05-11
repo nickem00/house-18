@@ -133,6 +133,17 @@
     background-color: var(--accent-color);
 }
 
+.checkout-order-button:disabled {
+    /* Lower transparency or brightness */
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.checkout-order-button:disabled:hover {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+}
+
 /* == ORDER SUMMARY == */
 .checkout-right-summary {
     margin-top: 68.84px;
