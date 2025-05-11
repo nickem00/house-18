@@ -11,25 +11,36 @@ const generateToken = (id, userId, email, isAdmin) => {
     { expiresIn: '1h' });
 };
 
+// Middleware to verify JWT token
+// This middleware checks if the token is valid and if so, it adds the decoded user information to the request object
 const verifyToken = (req, res, next) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+  const authHeader = req.header('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res
+      .status(401)
+      .json({ message: 'Access denied. No token provided.' });
+  }
 
-    if (!token) {
-        return res.status(401).json({ message: 'Access denied. No token provided.' });
+  const token = authHeader.replace('Bearer ', '');
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return res
+        .status(401)
+        .json({ message: 'Token expired.' });
     }
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        // Lägg till detaljerad felinformation för att hjälpa felsökning
-        return res.status(400).json({ 
-            message: 'Invalid token.',
-            error: error.message  // Visa specifika felmeddelanden från jwt-verifieringen
-        });
-    }
+    return res
+      .status(401)
+      .json({
+        message: 'Invalid token.',
+        error: error.message
+      });
+  }
 };
+
 
 
 export { generateToken, verifyToken };

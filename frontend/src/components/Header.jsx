@@ -3,13 +3,12 @@ import '../styles/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
 import { useCart } from "../context/useCart";
-import CartModal from "./CartModal";
 
-export default function Header() {
+export default function Header({ setIsCartOpen, isCartOpen }) {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false);
-
     const { cartItems } = useCart();
+
+    const token = localStorage.getItem("token");
 
     const handleCartClick = () => {
         setIsCartOpen(!isCartOpen);
@@ -33,7 +32,7 @@ export default function Header() {
                         <li>
                             <ul className="icons-list">
                                 <li>
-                                    <Link className="icon" to="/profile">
+                                    <Link className="icon" to={token ? "/Profile" : "/Login-Register"}>
                                         <FontAwesomeIcon icon={['far', 'user']} />
                                     </Link>
                                 </li>
@@ -60,7 +59,6 @@ export default function Header() {
                     </ul>
                 </nav>
             </div>
-            <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </header>
     );
 }

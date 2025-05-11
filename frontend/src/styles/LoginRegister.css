@@ -1,0 +1,196 @@
+/* LoginRegister.css */
+/* Styling for LoginRegister page using global CSS variables */
+
+.login-register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10rem;
+  min-height: calc(100vh - 160px);
+  padding: 2rem;
+}
+
+.login-register-form,
+.input-field {
+  box-sizing: border-box;
+}
+
+/* Tabs wrapper */
+.login-register-tabs {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Diagonal separator between tabs */
+.login-register-tabs::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 44%;
+  width: 2px;
+  height: 80px;
+  background: var(--text-color);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: transform 0.6s ease;
+}
+
+.login-register-tabs:has(> button.active:nth-child(1))::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.login-register-tabs:has(> button.active:nth-child(2))::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Individual tab buttons */
+.login-register-tabs button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: rgba(var(--text-color-rgb), 0.2);
+  transition: color 0.2s;
+}
+
+/* Active tab styling */
+.login-register-tabs button.active {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+/* Form wrapper box */
+.login-register-form {
+  background: var(--box-color);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 5rem;
+  width: 100%;
+  min-height: 556px;
+  max-width: 556px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* Input grouping */
+.login-register-form .input-group {
+  margin-bottom: 1.25rem;
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--input-field-color);
+  color: var(--input-text-color);
+  font-size: 0.9rem;
+  outline: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Placeholder color */
+.input-field::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.input-field:hover {
+  border-color: var(--accent-color);
+}
+
+/* Input focus state */
+.input-field:focus {
+  background: rgba(var(--input-field-color-rgb), 0.8);
+}
+
+/* Submit button styling */
+.login-register-form button[type="submit"] {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 24px;
+  background: transparent;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.fields {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  /* definiera både durationer och (som default) noll delay */
+  transition: 
+    max-height 0.6s ease 0s, 
+    opacity     0.6s ease 0s;
+}
+
+.fields.hide {
+  /* fade-out börjar direkt */
+  max-height: 0;
+  opacity: 0;
+  /* explicit noll delay (valfritt, men tydligt) */
+  transition-delay: 0s, 0s;
+}
+
+.fields.show {
+  /* fade-in sker, men först efter att fade-out hunnit klart */
+  max-height: 556px;
+  opacity: 1;
+  /* samma delay som exit-duration (1s) */
+  transition-delay: 0.6s, 0.6s;
+}
+
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+
+/* Hover on submit */
+.login-register-form button[type="submit"]:hover {
+  background: var(--accent-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-register-container {
+    margin-top: 7rem;
+  }
+  .login-register-form {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+    min-height: 348px;
+  }
+  .login-register-tabs {
+    gap: 1rem;
+  }
+  .fields.show {
+    max-height: 348px;
+    opacity: 1;
+  }
+}

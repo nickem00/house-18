@@ -25,11 +25,11 @@
 
 .contact-form input,
 .contact-form textarea {
-    background-color: #222;
+    background-color: var(--input-field-color);
     border: none;
     border-radius: 5px;
     padding: 0.75rem;
-    color: var(--text-color);
+    color: white;
     font-size: 1rem;
     resize: vertical;
     border: 1px solid #00000000;
@@ -42,7 +42,7 @@
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-    color: var(--text-color);
+    color: var(--input-placeholder-color);
     opacity: 0.7;
 }
 

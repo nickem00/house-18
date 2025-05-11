@@ -1,7 +1,7 @@
 import Product from '../models/product.js';
 import { getNextCustomProductId } from '../utils/getNextId.js';
 
-
+// Get all products
 const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({});
@@ -11,6 +11,7 @@ const getAllProducts = async (req, res) => {
     }
 };
 
+// Get a product by ID
 const getProductById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -24,10 +25,11 @@ const getProductById = async (req, res) => {
     }
 };
 
+// Create a new product
 const createProduct = async (req, res) => {
     const { name, price, description, color, category, variants, images } = req.body;
   
-    if (!req.user.isAdmin) {
+    if (!req.user.isAdmin) { // Check if the user is an admin
         return res.status(401).json({ message: 'Unauthorized' });
     }
     if (!name || price == null || !description || !color || !category) {
@@ -81,7 +83,7 @@ const createProduct = async (req, res) => {
     }
 };
   
-
+// Update a product by ID
 const updateProduct = async (req, res) => {
     const productId = req.params.id;
     const allowed = (({ name, price, description, color, category, variants, images }) =>
@@ -118,7 +120,7 @@ const updateProduct = async (req, res) => {
     }
 };
   
-
+// Delete a product by ID
 const deleteProduct = async (req, res) => {
     const productId = req.params.id;
   

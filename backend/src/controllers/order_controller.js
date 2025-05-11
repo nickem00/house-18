@@ -2,13 +2,20 @@ import Order from '../models/order.js';
 import User from '../models/user.js';
 import Product from '../models/product.js';
 import { checkStock, decrementStock } from '../utils/stock.js';
+import { getNextCustomOrderId } from '../utils/getNextId.js';
 
+// Create a new order
 const createOrder = async (req, res) => {
-    const { user_id, products, status } = req.body;
+    let { products, shippingCost = 0, status } = req.body;
+    const user_id = req.user.user_id;
 
+    shippingCost = Number(shippingCost);
 
-    if (!user_id || !Array.isArray(products) || products.length === 0) {
-        return res.status(400).json({ message: 'All fields are required' });
+    if (isNaN(shippingCost) || shippingCost < 0) {
+        return res.status(400).json({ message: 'Shipping cost should be a non-negative number' });
+    }
+    if (!Array.isArray(products) || products.length === 0) {
+        return res.status(400).json({ message: 'Products array cannot be empty' });
     }
     if (typeof products !== 'object' || !Array.isArray(products)) {
         return res.status(400).json({ message: 'Products should be an array' });
@@ -39,6 +46,7 @@ const createOrder = async (req, res) => {
             }
         }
     
+        // Count total price
         let total = 0;
     
         const mappedItems = await Promise.all(products.map(async ({ product_id, size, quantity }) => {
@@ -54,15 +62,21 @@ const createOrder = async (req, res) => {
                 quantity
             };
         }));
+
+        // Add shipping cost to total
+        total += shippingCost;
     
         const user = await User.findOne({ user_id });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-    
+
+        const nextId = await getNextCustomOrderId();
         const newOrder = new Order({
+            order_id: nextId,
             user_id: user._id,
             items: mappedItems,
+            shippingCost,
             total: total,
             status: status || 'pending',
             createdAt: new Date()
@@ -84,10 +98,84 @@ const createOrder = async (req, res) => {
     }    
 };
 
-const getAllOrders = async (req, res) => {};
+// Get all orders
+const getAllOrders = async (req, res) => {
+    if (!req.user.isAdmin) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+    try {
+        const orders = await Order.find()
+            .populate('user_id', 'name email')
+            .populate('items.product', 'name price');
+        return res.status(200).json(orders);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
 
-const getOrderByCustomerID = async (req, res) => {};
+// Get orders by user ID
+const getOrderByUserID = async (req, res) => {
+    const { id } = req.params;
+  
+    if (!id) {
+        return res.status(400).json({ message: 'User ID is required' });
+    }
+  
+    if (!req.user.isAdmin && req.user.user_id !== id) { // Check if the user is not an admin and is not the same as the user ID in the request
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+  
+    try {
+        const user = await User.findOne({ user_id: id });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+      const orders = await Order
+        .find({ user_id: user._id })
+        .populate('user_id', 'name email')
+        .populate('items.product', 'name price');
+  
+        if (orders.length === 0) {
+            return res.status(404).json({ message: 'No orders found for this User' });
+        }
+        return res.status(200).json(orders);
+  
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ 
+            message: 'Server error', 
+            error: error.message 
+        });
+    }
+};
+  
+// Update order status
+const updateOrderStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.params;
 
-const updateOrderStatus = async (req, res) => {};
+    if (!req.user.isAdmin) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-export { createOrder, getAllOrders, getOrderByCustomerID, updateOrderStatus };
+    try {
+        const order = await Order.findOne({ order_id: id });
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        if (!['pending', 'shipped', 'delivered', 'cancelled'].includes(status)) {
+            return res.status(400).json({ message: 'Invalid status' });
+        }
+        order.status = status;
+        order.updatedAt = new Date();
+        await order.save();
+
+        return res.status(200).json(order);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+export { createOrder, getAllOrders, getOrderByUserID, updateOrderStatus };
