@@ -54,6 +54,11 @@
   font-family: var(--main-font)
 }
 
+.product-title {
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
 .add-to-cart-btn {
     background-color: #A06A4B; 
     color: var(--text-color);
@@ -104,4 +109,9 @@
 .shipping-and-details {
   flex-direction: column;
   margin-top: 2em;
+}
+
+.productSite-description {
+  max-width: 25em;
+  font-weight: 200;
 }

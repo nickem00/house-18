@@ -1,19 +1,19 @@
 export default function ProductInfo({product}){
     return(
         <section className="product-info">
-            <h4>{product.name}</h4>
+            <h4 className="product-title">{product.name}</h4>
             <p>{product.price}kr</p>
 
-            <section className="product-actions"  defaultValue="">
+            <section className="product-actions"  defaultValue="SIZE">
                 <select className="size-menu" name="sizes" id="sizes">
-                <option value="" disabled selected>Size</option>
+                <option value="" disabled selected>SIZE</option>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
             </select>
-            <button className="add-to-cart-btn">Add to cart</button>
+            <button className="add-to-cart-btn">ADD TO CART</button>
             </section>
 
             <ul className="shipping-and-details">
