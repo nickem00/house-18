@@ -26,7 +26,7 @@
 
 .sidebar {
     margin-top: 10em;
-    font-family: var(--main-fonth);
+    font-family: var(--main-font);
 }
 
 .sidebar ul {
@@ -38,7 +38,7 @@
 
 .category-btn{
   color: #696767;
-  font-family: var(--main-fonth);
+  font-family: var(--main-font);
   background:none;
   border:none;
   font-size: 15px;
@@ -67,7 +67,7 @@
 
 .product-grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 2rem;
     padding: 2rem;
     flex: 1;
@@ -90,6 +90,7 @@
   top: 0;
   left: 0;
   transition: opacity 0.5s ease;
+  border-radius: 10px;
 }
 
 .main-img {

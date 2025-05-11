@@ -9,8 +9,6 @@ export default function ProductImages({images, product}){
         }
     }, [images]);
 
-    
-
     return(
        <section className="product-images">
         <div className="thumbnails">
