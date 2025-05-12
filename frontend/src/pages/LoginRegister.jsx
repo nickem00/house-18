@@ -28,12 +28,10 @@ export default function LoginRegister() {
 
   const validate = () => {
     const errs = {};
-    // Email validering alltid
     if (!emailRegex.test(formData.email)) {
       errs.email = "Enter a valid email address.";
     }
 
-    // Lösenord – krävs alltid, men struktur bara på register
     if (!formData.password) {
       errs.password = "Enter a password.";
     } else if (mode === "register" && !passwordRegex.test(formData.password)) {
@@ -87,18 +85,15 @@ export default function LoginRegister() {
           const msg = data.message || "Something went wrong!";
           const newErrors = {};
 
-          // Skicka e-post-relaterade fel under email
           if (msg.toLowerCase().includes("email")) {
             newErrors.email = msg;
           }
-          // Skicka lösenords- eller credentials-fel under password
           else if (
             msg.toLowerCase().includes("password") ||
             msg.toLowerCase().includes("credentials")
           ) {
             newErrors.password = msg;
           }
-          // Annars behåll som general (t.ex. serverfel)
           else {
             newErrors.general = msg;
           }
@@ -107,12 +102,10 @@ export default function LoginRegister() {
           return;
         }
 
-        // Om OK: spara och navigera
         localStorage.setItem("token", data.token);
         localStorage.setItem("loggedIn", "true");
-        navigate("/");
-      } catch (err) {
-        // Nätverks/servern nere → general
+        navigate("/Profile");
+      } catch {
         setErrors({ general: "Could not reach the server!" });
       }
   };
