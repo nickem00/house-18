@@ -1,7 +1,28 @@
 .profile-page-container {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
     margin: 5rem 0;
     padding: 0 2rem;
+}
+
+.profile-summary {
+    width: fit-content;
+    /* margin: 0 auto; */
+    padding: 0 2rem;
+    background: transparent;
+    border-top: 1px solid #d7d7d778;
+    border-bottom: 1px solid #d7d7d778;
+    border-radius: 10px;
+    box-shadow: 0 6px 6px -6px rgba(255, 255, 255, 0.3), 
+                0 -6px 6px -6px rgba(255, 255, 255, 0.3);
+}
+
+/* Light mode styles for profile elements */
+body.light-mode .profile-summary {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.4), 
+                0 -6px 6px -6px rgba(0, 0, 0, 0.4);
 }
 
