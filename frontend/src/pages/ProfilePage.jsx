@@ -1,6 +1,6 @@
 import '../styles/ProfilePage.css';
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { fetchUserInfo } from "../features/ProfilePage/fetchUserInfo";
 
 export default function ProfilePage() {
@@ -36,15 +36,18 @@ export default function ProfilePage() {
             <h1>Your Profile</h1>
             <div className="profile-content">
                 
-                <div className="profile-summary">
-                    <h2>Your info:</h2>
-                    {userData && (
-                        <div className="user-info">
-                            <p><strong>Username:</strong> {userData.username}</p>
-                            <p><strong>Email:</strong> {userData.email}</p>
-                            <p><strong>User ID:</strong> {userData.user_id}</p>
-                        </div>
-                    )}
+                <div className="profile-summary-button-container">
+                    <div className="profile-summary">
+                        <h2>Your info:</h2>
+                        {userData && (
+                            <div className="user-info">
+                                <p><strong>Username:</strong> {userData.username}</p>
+                                <p><strong>Email:</strong> {userData.email}</p>
+                                <p><strong>User ID:</strong> {userData.user_id}</p>
+                            </div>
+                        )}
+                    </div>
+                    <Link to="/admin" className="profile-admin-dashboard-btn">Admin Dashboard</Link>
                 </div>
 
                 <div className='profile-liked-products'>
