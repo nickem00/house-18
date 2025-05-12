@@ -9,6 +9,7 @@ import ProductPage from "./pages/ProductPage";
 import LoginRegister from "./pages/LoginRegister";
 import Admin from './pages/Admin';
 import ProtectedAdminRoute from "./features/ProtectedAdminRoute";
+import ProfilePage from "./pages/ProfilePage";
 
 export const router = createBrowserRouter([
     {
@@ -21,10 +22,8 @@ export const router = createBrowserRouter([
             { path: "Store", element: <Store /> },
             { path: "products/:id", element: <ProductPage />},
             { path: "Login-Register", element: <LoginRegister /> },
-            { 
-                path: 'admin', 
-                element: <ProtectedAdminRoute><Admin /></ProtectedAdminRoute> 
-            },
+            { path: 'admin', element: <ProtectedAdminRoute><Admin /></ProtectedAdminRoute> },
+            { path: "profile", element: <ProfilePage /> },
         ],
     },
 ]);
