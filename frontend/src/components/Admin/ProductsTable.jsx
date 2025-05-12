@@ -37,7 +37,8 @@ export default function ProductsTable({ products, onDelete, onUpdate, onEditClic
               <td>{p.id}</td>
               <td>{p.name}</td>
               <td>{p.price} kr</td>
-              <td>{p.stock}</td>              <td>
+              <td>{p.stock}</td>              
+              <td>
                 <button
                   className="link-button"
                   onClick={() => onEditClick(p)}
@@ -58,8 +59,7 @@ export default function ProductsTable({ products, onDelete, onUpdate, onEditClic
               <tr className="variant-row">
                 <td colSpan="7">
                   <div className="variants-container">
-                    <h4>Variants</h4>
-                    <table className="variants-table">
+                    <table className="variants-table first">
                       <thead>
                         <tr>
                           <th>Size</th>
@@ -73,6 +73,20 @@ export default function ProductsTable({ products, onDelete, onUpdate, onEditClic
                             <td>{variant.stock}</td>
                           </tr>
                         ))}
+                      </tbody>
+                    </table>
+                    <table className="variants-table second">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Color</th>
+                        </tr>                      
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{p.originalData.category}</td>
+                          <td>{p.originalData.color}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
