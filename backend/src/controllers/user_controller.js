@@ -148,4 +148,22 @@ const getUser = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser, updateUser, getUser };
+// Get current user from token
+const getCurrentUser = async (req, res) => {
+    try {
+        // user_id is included in the token and extracted by the verifyToken middleware
+        const userId = req.user.user_id;
+        
+        const user = await User.findOne({ user_id: userId }).select('-passwordHash');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error getting current user:', error);
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+export { registerUser, loginUser, updateUser, getUser, getCurrentUser };
