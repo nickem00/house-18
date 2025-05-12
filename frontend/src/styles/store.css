@@ -6,7 +6,7 @@
   }
 
 .all-categories-btn {
-    color: white;
+    color: var(--text-color);
     font-weight: 300;
     font-size: 16px;
     display: inline-block;

@@ -92,14 +92,14 @@
     margin-top: 1rem;
     width: 25em;
     border-radius: 8px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--text-color);
     font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
 .size-menu option {
   background-color: var(--background-color);
-  border: 1px solid #B47C54;
+  
 }
 
 .size-menu:hover {
