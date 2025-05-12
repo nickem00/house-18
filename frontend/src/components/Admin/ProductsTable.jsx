@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function ProductsTable({ products, onDelete, onUpdate }) {
+export default function ProductsTable({ products, onDelete, onUpdate, onEditClick }) {
   const [expandedRows, setExpandedRows] = useState({});
 
   const toggleRowExpansion = (id) => {
@@ -37,11 +37,10 @@ export default function ProductsTable({ products, onDelete, onUpdate }) {
               <td>{p.id}</td>
               <td>{p.name}</td>
               <td>{p.price} kr</td>
-              <td>{p.stock}</td>
-              <td>
+              <td>{p.stock}</td>              <td>
                 <button
                   className="link-button"
-                  onClick={() => onUpdate(p.id)}
+                  onClick={() => onEditClick(p)}
                 >
                   Update
                 </button>
