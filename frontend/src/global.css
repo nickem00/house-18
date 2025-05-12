@@ -8,6 +8,7 @@
     --input-text-color: #fff;
     --input-placeholder-color: #9e9e9e;
     --box-color: #363636af;
+    --table-row-color: #222;
     --body-background-image:
         radial-gradient(circle at -10% 30%, rgba(20,20,20,1) 0%, transparent 40%),
         radial-gradient(circle at 110% 60%, rgb(32, 32, 32) 0%, transparent 40%),
@@ -48,6 +49,7 @@ body.light-mode {
     --text-color: #121212;
     --input-field-color: #686868;
     --input-placeholder-color: #cacaca;
+    --table-row-color: #cacaca;
 
     --body-background-image: none;
 
