@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-export default function AddProductCard({ onAdd }) {
+export default function AddProductCard({ onAdd, initialValues = {} }) {
   const [form, setForm] = useState({ 
-    name: '', 
-    description: '', 
-    price: '', 
-    color: '', 
-    category: '',
-    variants: [{ size: 'M', stock: '' }],
-    images: ['', '']
+    name: initialValues.name || '', 
+    description: initialValues.description || '', 
+    price: initialValues.price || '', 
+    color: initialValues.color || '', 
+    category: initialValues.category || '',
+    variants: initialValues.variants || [{ size: 'M', stock: '' }],
+    images: initialValues.images || ['', '']
   });
   const [error, setError] = useState('');
 
@@ -53,22 +53,39 @@ export default function AddProductCard({ onAdd }) {
     setError('');
   };
 
+  const addImage = () => {
+    setForm(f => ({
+      ...f,
+      images: [...f.images, '']
+    }));
+  };
+
+  const removeImage = (index) => {
+    if (form.images.length > 1) {
+      setForm(f => {
+        const newImages = [...f.images];
+        newImages.splice(index, 1);
+        return { ...f, images: newImages };
+      });
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     const { name, description, price, color, category, variants, images } = form;
-    
+
     // Validate required fields
     if (!name || !description || !price || !color || !category) {
       setError('Name, description, price, color, and category are required.');
       return;
     }
-    
+
     // Validate variants
     if (!variants.length || variants.some(v => !v.size || !v.stock)) {
       setError('Each variant must have size and stock.');
       return;
     }
-    
+
     // Validate images (at least one image required)
     if (!images[0].trim()) {
       setError('At least one image URL is required.');
@@ -92,16 +109,18 @@ export default function AddProductCard({ onAdd }) {
       images: images.filter(img => img.trim() !== '')
     });
 
-    // Reset form
-    setForm({ 
-      name: '', 
-      description: '', 
-      price: '', 
-      color: '', 
-      category: '',
-      variants: [{ size: 'M', stock: '' }],
-      images: ['', '']
-    });
+    // Reset form only if adding a new product
+    if (!initialValues.id) {
+      setForm({ 
+        name: '', 
+        description: '', 
+        price: '', 
+        color: '', 
+        category: '',
+        variants: [{ size: 'M', stock: '' }],
+        images: ['', '']
+      });
+    }
   };
 
   return (
@@ -182,16 +201,29 @@ export default function AddProductCard({ onAdd }) {
 
       <h3>Images</h3>
       {form.images.map((url, index) => (
-        <input
-          key={index}
-          placeholder={`Image URL ${index + 1}`}
-          className="input-field"
-          value={url}
-          onChange={(e) => handleImageChange(index, e.target.value)}
-        />
+        <div key={index} className="image-row">
+          <input
+            placeholder={`Image URL ${index + 1}`}
+            className="input-field"
+            value={url}
+            onChange={(e) => handleImageChange(index, e.target.value)}
+          />
+          <button 
+            type="button" 
+            onClick={() => removeImage(index)}
+            className="remove-image-btn"
+          >
+            Remove
+          </button>
+        </div>
       ))}
+      <button type="button" onClick={addImage} className="add-image-btn">
+        Add Image URL
+      </button>
 
-      <button type="submit">Add Product</button>
+      <button type="submit">
+        {initialValues.id ? 'Update Product' : 'Add Product'}
+      </button>
     </form>
   );
 }

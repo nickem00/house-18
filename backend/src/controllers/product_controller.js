@@ -86,17 +86,52 @@ const createProduct = async (req, res) => {
 // Update a product by ID
 const updateProduct = async (req, res) => {
     const productId = req.params.id;
-    const allowed = (({ name, price, description, color, category, variants, images }) =>
+    let allowed = (({ name, price, description, color, category, variants, images }) =>
         ({ name, price, description, color, category, variants, images }))(req.body);
   
     if (!req.user.isAdmin) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-  
+    
+    // Filter out empty values
+    const cleanData = {};
+    Object.keys(allowed).forEach(key => {
+        // Skip empty strings
+        if (allowed[key] === "") return;
+        
+        // Skip empty arrays
+        if (Array.isArray(allowed[key]) && allowed[key].length === 0) return;
+        
+        // Handle arrays with potentially empty values
+        if (Array.isArray(allowed[key])) {
+            // Handle variant arrays with incomplete data
+            if (key === 'variants') {
+                const filteredVariants = allowed[key].filter(v => v.size && v.stock !== undefined);
+                if (filteredVariants.length > 0) {
+                    cleanData[key] = filteredVariants;
+                }
+            }
+            // Handle image arrays with empty strings
+            else if (key === 'images') {
+                const filteredImages = allowed[key].filter(img => img && img.trim() !== '');
+                if (filteredImages.length > 0) {
+                    cleanData[key] = filteredImages;
+                }
+            }
+            else if (allowed[key].length > 0) {
+                cleanData[key] = allowed[key];
+            }
+        }
+        // Handle other valid values
+        else if (allowed[key] !== undefined && allowed[key] !== null) {
+            cleanData[key] = allowed[key];
+        }
+    });
+    
     try {
         const product = await Product.findOneAndUpdate(
             { product_id: productId },
-            { ...allowed, updatedAt: Date.now() },
+            { ...cleanData, updatedAt: Date.now() },
             { new: true, runValidators: true }
         );
   
