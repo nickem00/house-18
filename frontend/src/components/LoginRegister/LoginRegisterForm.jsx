@@ -12,13 +12,13 @@ export default function LoginRegisterForm({
     <form className="login-register-form" onSubmit={onSubmit} noValidate>
       <div className={`fields login-fields ${mode === "login" ? "show" : "hide"}`}>
         <InputField
-          label="Email"
-          type="email"
-          name="email"
-          value={formData.email}
+          label="Email or Username"
+          name="emailOrUsername"
+          value={formData.emailOrUsername || ""}
           onChange={onChange}
+          placeholder="Enter your email or username"
         />
-        {errors.email && <p className="error">{errors.email}</p>}
+        {errors.emailOrUsername && <p className="error">{errors.emailOrUsername}</p>}
 
         <InputField
           label="Password"

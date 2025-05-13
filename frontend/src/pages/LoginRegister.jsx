@@ -11,6 +11,7 @@ export default function LoginRegister() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
+    emailOrUsername: "",
     password: "",
     confirmPassword: "",
   });
@@ -28,8 +29,19 @@ export default function LoginRegister() {
 
   const validate = () => {
     const errs = {};
-    if (!emailRegex.test(formData.email)) {
-      errs.email = "Enter a valid email address.";
+    
+    if (mode === "login") {
+      if (!formData.emailOrUsername) {
+        errs.emailOrUsername = "Please enter your email or username.";
+      }
+    } else {
+      if (!emailRegex.test(formData.email)) {
+        errs.email = "Enter a valid email address.";
+      }
+      
+      if (!formData.username.trim()) {
+        errs.username = "Enter a username.";
+      }
     }
 
     if (!formData.password) {
@@ -40,76 +52,71 @@ export default function LoginRegister() {
     }
 
     if (mode === "register") {
-      if (!formData.username.trim()) {
-        errs.username = "Enter a username.";
-      }
       if (formData.password !== formData.confirmPassword) {
         errs.confirmPassword = "Passwords do not match.";
       }
     }
 
     return errs;
-};
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const validationErrors = validate();
-      if (Object.keys(validationErrors).length) {
-        setErrors(validationErrors);
+    try {
+      const url =
+        mode === "login"
+          ? `${import.meta.env.VITE_API_BASE_URL}/api/users/login`
+          : `${import.meta.env.VITE_API_BASE_URL}/api/users/register`;
+      const payload =
+        mode === "login"
+          ? { emailOrUsername: formData.emailOrUsername, password: formData.password }
+          : {
+              username: formData.username,
+              email: formData.email,
+              password: formData.password,
+            };
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        const msg = data.message || "Something went wrong!";
+        const newErrors = {};
+
+        if (msg.toLowerCase().includes("email") || msg.toLowerCase().includes("username")) {
+          newErrors[mode === "login" ? "emailOrUsername" : "email"] = msg;
+        }
+        else if (
+          msg.toLowerCase().includes("password") ||
+          msg.toLowerCase().includes("credentials")
+        ) {
+          newErrors.password = msg;
+        }
+        else {
+          newErrors.general = msg;
+        }
+
+        setErrors(newErrors);
         return;
       }
 
-      try {
-        const url =
-          mode === "login"
-            ? `${import.meta.env.VITE_API_BASE_URL}/api/users/login`
-            : `${import.meta.env.VITE_API_BASE_URL}/api/users/register`;
-        const payload =
-          mode === "login"
-            ? { email: formData.email, password: formData.password }
-            : {
-                username: formData.username,
-                email: formData.email,
-                password: formData.password,
-              };
-
-        const res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          const msg = data.message || "Something went wrong!";
-          const newErrors = {};
-
-          if (msg.toLowerCase().includes("email")) {
-            newErrors.email = msg;
-          }
-          else if (
-            msg.toLowerCase().includes("password") ||
-            msg.toLowerCase().includes("credentials")
-          ) {
-            newErrors.password = msg;
-          }
-          else {
-            newErrors.general = msg;
-          }
-
-          setErrors(newErrors);
-          return;
-        }
-
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("loggedIn", "true");
-        navigate("/Profile");
-      } catch {
-        setErrors({ general: "Could not reach the server!" });
-      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("loggedIn", "true");
+      navigate("/Profile");
+    } catch {
+      setErrors({ general: "Could not reach the server!" });
+    }
   };
-
 
   return (
     <div className="login-register-container">
