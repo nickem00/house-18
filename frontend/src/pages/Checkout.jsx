@@ -54,16 +54,28 @@ export default function Checkout() {
         if (!fullName || !email || !address || !city || !postalCode || !country || !cardNumber || !expirationDate || !cvc) {
             alert("Please fill in all required fields");
             return;
-        }
-        
+        }        
         const result = await createOrder(cartItems, shippingCost);
 
         if (result.error) {
             alert(result.error);
             return;
-        }        alert("Order placed successfully!");
+        }        
+        alert("Order placed successfully!");
         clearCart();
-        navigate("/store");
+        navigate(`/order-confirmation/${result.data.order.order_id}`, {
+            state: {
+                address: {
+                    fullName : fullName,
+                    email,
+                    address,
+                    city,
+                    postalCode,
+                    country,
+                    shippingMethod
+                }
+            }
+        });
     }
 
     // Calculate the total price from the enriched cart items
