@@ -80,9 +80,11 @@ const createOrder = async (req, res) => {
             total: total,
             status: status || 'pending',
             createdAt: new Date()
-        });
+        });        await newOrder.save();
     
-        await newOrder.save();
+        // Update the user's order history
+        user.orderHistory.push(newOrder._id);
+        await user.save();
     
         for (const { product_id, size, quantity } of products) {
             await decrementStock(product_id, size, quantity);

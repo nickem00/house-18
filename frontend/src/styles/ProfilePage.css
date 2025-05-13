@@ -47,3 +47,75 @@ body.light-mode .profile-summary {
 .profile-admin-dashboard-btn:hover {
     background-color: var(--accent-color);;
 }
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.profile-liked-products, .profile-orders {
+    padding: 1.5rem;
+    background: transparent;
+    border-top: 1px solid #d7d7d778;
+    border-bottom: 1px solid #d7d7d778;
+    border-radius: 10px;
+    box-shadow: 0 6px 6px -6px rgba(255, 255, 255, 0.3), 
+                0 -6px 6px -6px rgba(255, 255, 255, 0.3);
+}
+
+body.light-mode .profile-liked-products,
+body.light-mode .profile-orders {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.4), 
+                0 -6px 6px -6px rgba(0, 0, 0, 0.4);
+}
+
+.profile-liked-products ul, .profile-orders ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.profile-liked-products li, .profile-orders li {
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.light-mode .profile-liked-products li, 
+body.light-mode .profile-orders li {
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.profile-liked-products li:hover, .profile-orders li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.order-items {
+    margin-top: 0.5rem;
+}
+
+.order-items ul {
+    display: block;
+    margin-left: 1rem;
+}
+
+.order-items li {
+    border: none;
+    padding: 0.25rem 0;
+    background: none;
+}
+
+.order-items li:hover {
+    transform: none;
+    box-shadow: none;
+}

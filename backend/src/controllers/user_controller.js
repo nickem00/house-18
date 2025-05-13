@@ -154,7 +154,21 @@ const getCurrentUser = async (req, res) => {
         // user_id is included in the token and extracted by the verifyToken middleware
         const userId = req.user.user_id;
         
-        const user = await User.findOne({ user_id: userId }).select('-passwordHash');
+        const user = await User.findOne({ user_id: userId })
+            .select('-passwordHash')
+            .populate({
+                path: 'likedProducts',
+                select: 'product_id name description price images' // Select relevant fields
+            })
+            .populate({
+                path: 'orderHistory',
+                select: 'order_id total status createdAt items',
+                populate: {
+                    path: 'items.product',
+                    select: 'name product_id price'
+                }
+            });
+            
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

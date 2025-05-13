@@ -48,14 +48,12 @@ export default function ProfilePage() {
                         )}
                     </div>
                     <Link to="/admin" className="profile-admin-dashboard-btn">Admin Dashboard</Link>
-                </div>
-
-                <div className='profile-liked-products'>
+                </div>                <div className='profile-liked-products'>
                     <h2>Liked Products:</h2>
                     {userData && userData.likedProducts && userData.likedProducts.length > 0 ? (
                         <ul>
-                            {userData.liked_products.map((product) => (
-                                <li key={product.id}>
+                            {userData.likedProducts.map((product) => (
+                                <li key={product.product_id}>
                                     <p><strong>{product.name}</strong></p>
                                     <p>{product.description}</p>
                                     <p>Price: ${product.price}</p>
@@ -65,16 +63,26 @@ export default function ProfilePage() {
                     ) : (
                         <p>No liked products found.</p>
                     )}
-                </div>
-                <div className='profile-orders'>
+                </div>                <div className='profile-orders'>
                     <h2>Your Orders:</h2>
-                    {userData && userData.orders && userData.orders.length > 0 ? (
+                    {userData && userData.orderHistory && userData.orderHistory.length > 0 ? (
                         <ul>
-                            {userData.orders.map((order) => (
-                                <li key={order.id}>
-                                    <p><strong>Order ID:</strong> {order.id}</p>
-                                    <p><strong>Total Price:</strong> ${order.total_price}</p>
+                            {userData.orderHistory.map((order) => (
+                                <li key={order.order_id}>
+                                    <p><strong>Order ID:</strong> {order.order_id}</p>
+                                    <p><strong>Total Price:</strong> ${order.total}</p>
                                     <p><strong>Status:</strong> {order.status}</p>
+                                    <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
+                                    <div className="order-items">
+                                        <p><strong>Items:</strong></p>
+                                        <ul>
+                                            {order.items.map((item, index) => (
+                                                <li key={index}>
+                                                    <p>{item.product.name} - Size: {item.size}, Qty: {item.quantity}</p>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
