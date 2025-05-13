@@ -115,3 +115,65 @@
   max-width: 25em;
   font-weight: 200;
 }
+
+/*========Responsive Design========*/
+
+@media (max-width: 1360px) {
+  .product-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .product-images {
+    align-items: center;
+    margin-left: 0;
+    margin-top: 4em;
+    justify-content: center;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .product-info h4 {
+    margin: 0;
+  }
+
+}
+
+@media (max-width: 900px) {
+  .product-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+  }
+
+  .product-images {
+    align-items: center;
+    margin-left: 0;
+    margin-top: 4em;
+    justify-content: center;
+  }
+
+  .thumbnails {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .product-info {
+    justify-content: center;
+    margin: 0;
+  }
+
+  .product-info h4 {
+    margin: 0;
+  }
+}
