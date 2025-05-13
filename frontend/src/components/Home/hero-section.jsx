@@ -8,9 +8,6 @@ export default function HeroSection() {
 
     const testItem = {
         product_id: "P003",
-        name: "Test Item",
-        price: 19.99,
-        image: "https://res.cloudinary.com/dzcqnchjm/image/upload/v1746556423/shirt-hero-section_b7rsnf.png",
         size: "M",
         quantity: 1,
     }

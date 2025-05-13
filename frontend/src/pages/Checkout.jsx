@@ -1,12 +1,13 @@
 import { useCart } from "../context/useCart";
 import '../styles/Checkout.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createOrder } from "../features/createOrder";
 import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
     const { cartItems, clearCart } = useCart();
     const [ shippingCost, setShippingCost ] = useState(49);
+    const [ enrichedCartItems, setEnrichedCartItems ] = useState([]);
     const navigate = useNavigate();
 
     // States for all input fields
@@ -21,7 +22,33 @@ export default function Checkout() {
     const [ cvc, setCvc ] = useState("");
     const [ shippingMethod, setShippingMethod ] = useState("standard");
 
-      // Function to handle the order placement
+    const baseAPIUrl = import.meta.env.VITE_API_BASE_URL;
+    
+    // Fetch product details from the API
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            const responses = await Promise.all(
+                cartItems.map(item => 
+                    fetch(`${baseAPIUrl}/api/products/${item.product_id}`)
+                        .then(res => res.json())
+                        .then(product => ({
+                            ...item,
+                            name: product.name,
+                            price: product.price
+                        }))
+                )
+            );
+            setEnrichedCartItems(responses);
+        };
+
+        if (cartItems.length > 0) {
+            fetchProductDetails();
+        } else {
+            setEnrichedCartItems([]);
+        }
+    }, [cartItems, baseAPIUrl]);
+
+    // Function to handle the order placement
     const handlePlaceOrder = async () => {
         // Check if all required fields are filled
         if (!fullName || !email || !address || !city || !postalCode || !country || !cardNumber || !expirationDate || !cvc) {
@@ -29,34 +56,37 @@ export default function Checkout() {
             return;
         }
         
-
         const result = await createOrder(cartItems, shippingCost);
 
         if (result.error) {
             alert(result.error);
             return;
-        }
-
-        alert("Order placed successfully!");
+        }        alert("Order placed successfully!");
         clearCart();
         navigate("/store");
     }
 
-    // Used for future order summary
-    const orderData = {
-            items: cartItems,
-            shipping: {
-                fullName,
-                email,
-                address,
-                city,
-                postalCode,
-                country,
-                method: shippingMethod,
-                cost: shippingCost
-            },
-            total: cartItems.reduce((sum, item) => sum + item.price, 0) + shippingCost
+    // Calculate the total price from the enriched cart items
+    const calculateTotal = () => {
+        return enrichedCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + shippingCost;
     };
+
+    // Prepared order data structure - remove the variable assignment to avoid unused variable warning
+    // Order data shape for reference:
+    // {
+    //     items: enrichedCartItems,
+    //     shipping: {
+    //         fullName,
+    //         email,
+    //         address,
+    //         city,
+    //         postalCode,
+    //         country,
+    //         method: shippingMethod,
+    //         cost: shippingCost
+    //     },
+    //     total: calculateTotal()
+    // };
 
     return (
         <div className="checkout-container">
@@ -189,15 +219,20 @@ export default function Checkout() {
                         >
                             PLACE ORDER
                     </button>
-                </div>
-                <div className="checkout-right-summary">
+                </div>                <div className="checkout-right-summary">
                     <h2>Order Summary</h2>
-                    {cartItems.length > 0 ? (
+                    {enrichedCartItems.length > 0 ? (
                         <>
-                            {cartItems.map((item, index) => (
+                            {enrichedCartItems.map((item, index) => (
                                 <div key={index} className="checkout-item">
-                                    <p>{item.name}</p>
-                                    <p>{item.price} kr</p>
+                                    <div className="checkout-item-info">
+                                        <p className="checkout-item-name">{item.name}</p>
+                                        <div className="checkout-item-details">
+                                            <span className="checkout-item-size">Size: {item.size}</span>
+                                            <span className="checkout-item-quantity">Qty: {item.quantity}</span>
+                                        </div>
+                                    </div>
+                                    <p className="checkout-item-price">{item.price * item.quantity} kr</p>
                                 </div>
                             ))}
                         
@@ -208,7 +243,7 @@ export default function Checkout() {
                             <div className="checkout-summary-total">
                                 <p>Total</p>
                                 <p>
-                                    {cartItems.reduce((sum, item) => sum + item.price, 0) + shippingCost} kr
+                                    {calculateTotal()} kr
                                 </p>
                             </div>
                         </>
@@ -223,8 +258,8 @@ export default function Checkout() {
 
 // Use the following code to display cart items in the checkout page
 {/* <div>
-    {cartItems.length > 0 ? (
-        cartItems.map((item, index) => (
+    {enrichedCartItems.length > 0 ? (
+        enrichedCartItems.map((item, index) => (
             <div key={index}>
                 <p>{item.name}</p>
                 <p>{item.price}</p>
