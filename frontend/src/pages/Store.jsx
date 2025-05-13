@@ -5,7 +5,7 @@ import ProductGrid from "../components/Store/ProductGrid";
 import getCategoryCount from "../features/categoryCount";
 
 export default function Store() {
-    const URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
     const [products, setProducts] = useState([]);
     const [categoryCounts, setCategoryCounts] = useState({});
     const [selectedCategory, setSelectedCategory] = useState(null);
