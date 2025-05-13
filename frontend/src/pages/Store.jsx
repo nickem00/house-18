@@ -11,7 +11,7 @@ export default function Store() {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(()=> {
-        fetch(`${URL}/products`)
+        fetch(`${URL}/api/products`)
             .then((res) => res.json())
             .then((data)=>{
                 setProducts(data);
