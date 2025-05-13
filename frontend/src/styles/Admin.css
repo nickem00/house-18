@@ -168,7 +168,7 @@
   }
 
   .stats-card {
-    background-color: var(--box-color);
+    background-color: var(--table-row-color);
     padding: 2rem;
     border-radius: 12px;
     width: 100%;
