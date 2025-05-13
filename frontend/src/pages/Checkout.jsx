@@ -61,17 +61,17 @@ export default function Checkout() {
         if (result.error) {
             alert(result.error);
             return;
-        }
-
-        alert("Order placed successfully!");
+        }        alert("Order placed successfully!");
         clearCart();
         navigate("/store");
     }
 
     // Calculate the total price from the enriched cart items
     const calculateTotal = () => {
-        return enrichedCartItems.reduce((sum, item) => sum + item.price, 0) + shippingCost;
-    };    // Prepared order data structure - remove the variable assignment to avoid unused variable warning
+        return enrichedCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + shippingCost;
+    };
+
+    // Prepared order data structure - remove the variable assignment to avoid unused variable warning
     // Order data shape for reference:
     // {
     //     items: enrichedCartItems,
@@ -219,15 +219,20 @@ export default function Checkout() {
                         >
                             PLACE ORDER
                     </button>
-                </div>
-                <div className="checkout-right-summary">
+                </div>                <div className="checkout-right-summary">
                     <h2>Order Summary</h2>
                     {enrichedCartItems.length > 0 ? (
                         <>
                             {enrichedCartItems.map((item, index) => (
                                 <div key={index} className="checkout-item">
-                                    <p>{item.name}</p>
-                                    <p>{item.price} kr</p>
+                                    <div className="checkout-item-info">
+                                        <p className="checkout-item-name">{item.name}</p>
+                                        <div className="checkout-item-details">
+                                            <span className="checkout-item-size">Size: {item.size}</span>
+                                            <span className="checkout-item-quantity">Qty: {item.quantity}</span>
+                                        </div>
+                                    </div>
+                                    <p className="checkout-item-price">{item.price * item.quantity} kr</p>
                                 </div>
                             ))}
                         

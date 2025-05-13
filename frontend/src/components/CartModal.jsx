@@ -3,7 +3,7 @@ import { useCart } from '../context/useCart';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 export default function CartModal({ isOpen, onClose }) {
     const { cartItems, clearCart, hasItems, setCartItems } = useCart();
@@ -45,6 +45,29 @@ export default function CartModal({ isOpen, onClose }) {
         setCartItems(updatedCart);
     };
 
+    const handleIncreaseQuantity = (index) => {
+        const updatedCart = [...cartItems];
+        updatedCart[index] = {
+            ...updatedCart[index],
+            quantity: updatedCart[index].quantity + 1
+        };
+        setCartItems(updatedCart);
+    };
+
+    const handleDecreaseQuantity = (index) => {
+        const updatedCart = [...cartItems];
+        if (updatedCart[index].quantity > 1) {
+            updatedCart[index] = {
+                ...updatedCart[index],
+                quantity: updatedCart[index].quantity - 1
+            };
+            setCartItems(updatedCart);
+        } else {
+            // If quantity is 1, remove the item instead
+            handleRemove(index);
+        }
+    };
+
     if(!isOpen) return null;
 
     return (
@@ -55,11 +78,38 @@ export default function CartModal({ isOpen, onClose }) {
             {hasItems ? (
                 <ul className='cart-item-list'>
                     {enrichedCartItems.map((item, index) => (
-                        <li key={index}>
-                            <div>{item.name} - {item.price} kr</div>
-                            <button onClick={() => handleRemove(index)} className='remove-item-button'>
-                                <FontAwesomeIcon icon={faTrash} />
-                            </button>
+                        <li key={index} className="cart-item">
+                            <div className="cart-item-details">
+                                <div className="cart-item-name">{item.name}</div>
+                                <div className="cart-item-size">Size: {item.size}</div>
+                                <div className="cart-item-price">{item.price} kr</div>
+                            </div>
+                            <div className="cart-item-actions">
+                                <div className="quantity-controls">
+                                    <button
+                                        onClick={() => handleDecreaseQuantity(index)}
+                                        className="quantity-button"
+                                        aria-label="Decrease quantity"
+                                    >
+                                        <FontAwesomeIcon icon={faMinus} />
+                                    </button>
+                                    <span className="item-quantity">{item.quantity}</span>
+                                    <button
+                                        onClick={() => handleIncreaseQuantity(index)}
+                                        className="quantity-button"
+                                        aria-label="Increase quantity"
+                                    >
+                                        <FontAwesomeIcon icon={faPlus} />
+                                    </button>
+                                </div>
+                                <button
+                                    onClick={() => handleRemove(index)}
+                                    className='remove-item-button'
+                                    aria-label="Remove item"
+                                >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                            </div>
                         </li>
                     ))}
                 </ul>

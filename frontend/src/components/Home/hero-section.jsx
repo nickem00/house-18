@@ -7,7 +7,7 @@ export default function HeroSection() {
     const { addToCart } = useCart();
 
     const testItem = {
-        product_id: "P004",
+        product_id: "P003",
         size: "M",
         quantity: 1,
     }
