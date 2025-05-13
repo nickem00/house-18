@@ -57,19 +57,27 @@ const registerUser = async (req, res) => {
 
 // Login user
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { emailOrUsername, password } = req.body;
+    if (!emailOrUsername || !password) {
         return res.status(400).json({ message: 'All fields are required' });
     }
     try {
-        const user = await User.findOne({ email });
+        // Check if the input is an email (contains @)
+        const isEmail = emailOrUsername.includes('@');
+        
+        // Search by email or username based on the format of the input
+        const query = isEmail ? { email: emailOrUsername } : { username: emailOrUsername };
+        const user = await User.findOne(query);
+        
         if (!user) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
+        
         const isMatch = await bcrypt.compare(password, user.passwordHash);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid password' });
         }
+        
         res.status(200).json({ 
             message: 'Login successful', 
             token: generateToken(user._id, user.user_id, user.email, user.isAdmin),
