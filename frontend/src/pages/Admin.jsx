@@ -134,12 +134,11 @@ export default function Admin() {
         })}
       </section>
 
-
-      <section className="products-section">
-        <article className="admin-article">
+      <article className="admin-article">
           <h2>Products</h2>
         </article>
 
+      <section className="products-section">
         <ProductsTable
           products={products}
           onDelete={handleDelete}
