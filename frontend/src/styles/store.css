@@ -74,6 +74,7 @@
   }
   
 .product-image-container {
+  display: block;
   position: relative;
   width: 200px;
   height: auto;
@@ -184,7 +185,6 @@
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;  
-    
   }
 
   .sidebar ul { 
