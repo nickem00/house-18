@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductsTable from '../components/Admin/ProductsTable';
 import AddProductCard from '../components/Admin/AddProductCard';
-import '../styles/admin.css';
+import '../styles/Admin.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
