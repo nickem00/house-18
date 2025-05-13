@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 export default function ProductPage(){
     const {id} = useParams();
     const [product, setProduct] = useState(null);
-    const URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api"
+    const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/"
    
      useEffect(()=> {
         if (!id) return;
 
-                fetch(`${URL}/products/${id}`)
+                fetch(`${URL}/api/products/${id}`)
                     .then(res => {
             if (!res.ok) throw new Error("Not found");
             return res.json();
