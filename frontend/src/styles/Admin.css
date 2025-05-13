@@ -10,11 +10,6 @@
     width: 100%;
   }
 
-.admin-page h1 {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-  }
-
 .products-section {
     display: flex;
     flex-direction: column;
@@ -99,17 +94,17 @@
     color: var(--background-color);
   }
   
-.admin-actions {
+  .admin-article {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
   }
   
-  .admin-actions button {
+  .admin-article button {
     width: 25%;
     margin-top: 0.5rem;
     padding: 0.75rem;
@@ -125,7 +120,7 @@
     text-decoration: none;
   }
 
-  .admin-actions button:hover {
+  .admin-article button:hover {
     background: var(--accent-color);
   }
 
@@ -155,4 +150,37 @@
 
   .add-product-card h3 {
     color: white;
+  }
+
+  .stats-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+
+  .stats-card {
+    background: transparent;
+    justify-content: space-around;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--text-color);
+    align-items: center;
+    background-color: var(--box-color);
+  }
+
+  .stats-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
   }
