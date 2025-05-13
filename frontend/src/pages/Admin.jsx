@@ -1,6 +1,6 @@
 // src/pages/Admin.jsx
 import React, { useState, useEffect } from 'react';
-import ProductsTable from '../components/Admin/Productstable';
+import ProductsTable from '../components/Admin/ProductsTable';
 import AddProductCard from '../components/Admin/AddProductCard';
 import '../styles/admin.css';
 import { useNavigate } from 'react-router-dom';
