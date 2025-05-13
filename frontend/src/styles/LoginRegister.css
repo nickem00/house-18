@@ -169,6 +169,10 @@
   transition: opacity 300ms, transform 300ms;
 }
 
+.input-group input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-field-color) inset !important;
+  -webkit-text-fill-color: var(--input-text-color) !important;
+}
 
 /* Hover on submit */
 .login-register-form button[type="submit"]:hover {
