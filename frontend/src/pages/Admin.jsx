@@ -83,16 +83,131 @@ export default function Admin() {
 
     fetchStats();
   }, [URL]);
-
   const toggleAddForm = () => setShowAddForm(prev => !prev);
 
-  const handleAddProduct = async (newProduct) => { /* ... unchanged ... */ };
-  const handleDelete = async (id) => { /* ... unchanged ... */ };
-  const handleUpdate = async (updatedProduct) => { /* ... unchanged ... */ };
-  const handleLogout = () => { /* ... unchanged ... */ };
+  const handleAddProduct = async (newProduct) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${URL}/api/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(newProduct)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add product');
+      }
+
+      const data = await response.json();
+      
+      // Update products list with new product
+      setProducts(prev => [...prev, {
+        id: data.product_id,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        color: data.color,
+        category: data.category,
+        variants: data.variants,
+        images: data.images,
+        stock: data.variants.reduce((total, v) => total + v.stock, 0),
+        originalData: data
+      }]);
+      
+      // Hide add form after successful addition
+      setShowAddForm(false);
+    } catch (err) {
+      console.error('Error adding product:', err);
+      alert('Failed to add product: ' + err.message);
+    }
+  };
+  
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${URL}/api/products/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete product');
+      }
+
+      // Remove product from state
+      setProducts(prev => prev.filter(p => p.id !== id));
+    } catch (err) {
+      console.error('Error deleting product:', err);
+      alert('Failed to delete product: ' + err.message);
+    }
+  };
+  
+  const handleUpdate = async (updatedProduct) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${URL}/api/products/${updatedProduct.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedProduct)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update product');
+      }
+
+      const data = await response.json();
+      
+      // Update the product in state
+      setProducts(prev => prev.map(p => 
+        p.id === updatedProduct.id ? {
+          ...p,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          color: data.color,
+          category: data.category,
+          variants: data.variants,
+          images: data.images,
+          stock: data.variants.reduce((total, v) => total + v.stock, 0),
+          originalData: data
+        } : p
+      ));
+      
+    } catch (err) {
+      console.error('Error updating product:', err);
+      alert('Failed to update product: ' + err.message);
+    }
+  };
+  
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+  
   const handleEditClick = (product) => setEditingProduct(product);
   const handleCancelEdit = () => setEditingProduct(null);
-  const handleSaveEdit = (updatedValues) => { /* ... unchanged ... */ };
+  
+  const handleSaveEdit = (updatedValues) => {
+    // Combine product ID with updated values
+    const productToUpdate = {
+      id: editingProduct.id,
+      ...updatedValues
+    };
+    
+    // Call the API update function
+    handleUpdate(productToUpdate);
+    
+    // Close the edit form
+    setEditingProduct(null);
+  };
 
   if (loading) return <div className="admin-page-container"><p>Loading products...</p></div>;
   if (error)   return <div className="admin-page-container"><p>Error: {error}</p></div>;

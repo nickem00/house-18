@@ -96,10 +96,9 @@ export default function AddProductCard({ onAdd, initialValues = {} }) {
     const processedVariants = variants.map(v => ({
       size: v.size,
       stock: Number(v.stock)
-    }));
-
-    // Send data to parent component
+    }));    // Send data to parent component
     onAdd({
+      ...(initialValues.id && { id: initialValues.id }), // Inkludera ID om det finns
       name,
       description,
       price: Number(price),
