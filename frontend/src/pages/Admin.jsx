@@ -146,7 +146,7 @@ export default function Admin() {
           onEditClick={handleEditClick}
         />
 
-        <article className="admin-article">
+        <article className="admin-article" id="add-product-article">
           <button className="link-button" onClick={toggleAddForm}>
             {showAddForm ? 'Cancel' : 'Add Product'}
           </button>

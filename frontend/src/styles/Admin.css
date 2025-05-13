@@ -194,6 +194,11 @@
     color: var(--text-color);
     margin: 0.5rem 0;
   }
+
+  #add-product-article {
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
     .add-product-card {
       max-width: 95%;
