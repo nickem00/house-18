@@ -1,17 +1,7 @@
 import { Link } from "react-router-dom";
 import '../../styles/home.css';
-import { useCart } from "../../context/useCart";
 
 export default function HeroSection() {
-    // == FOR TESTING CART FUNCTIONALITY ==
-    const { addToCart } = useCart();
-
-    const testItem = {
-        product_id: "P007",
-        size: "M",
-        quantity: 1,
-    }
-    // =======================================
 
     return (
         <section className="hero-section">
@@ -25,11 +15,6 @@ export default function HeroSection() {
                     <img src="https://res.cloudinary.com/dzcqnchjm/image/upload/v1746556423/shirt-hero-section_b7rsnf.png" alt="Hero" />
                 </div>
             </div>
-            {/* TESTBUTTON */}
-            <button onClick={() => addToCart(testItem)} className="add-to-cart-button">
-                Add to Cart
-            </button>
-            {/* ============= */}
         </section>
     );
 }
