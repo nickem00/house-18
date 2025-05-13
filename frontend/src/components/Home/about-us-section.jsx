@@ -23,8 +23,8 @@ export default function AboutUsSection() {
                 />
                 <TeamCard 
                     name="Pontus" 
-                    role="Bi-odlare" 
-                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/v1746616900/Screenshot_2025-05-03_161505_ayirj2.png" 
+                    role="Backend Disruption Engineer" 
+                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/v1747141539/image_qrbz4r.jpg" 
                 />
             </div>
         </section>
