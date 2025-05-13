@@ -10,21 +10,18 @@ export default function Footer() {
           <p>Timeless. Thoughtful. Crafted.</p>
         </div>
 
-        <div className="footer-columns">
-          <div className="footer-column">
+        <div className="footer-columns">          <div className="footer-column">
             <h4>Links</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/store">Store</a></li>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/store">Store</Link></li>
+              <li><Link to="/#about-store">About Us</Link></li>
+              <li><Link to="/#contact">Contact</Link></li>
             </ul>
-          </div>
-
-          <div className="footer-column">
+          </div>          <div className="footer-column">
             <h4>Contact Information</h4>
             <ul>
-              <li>Email: <a href="mailto:nicholas.malm0086@stud.hkr.se">info@house18.com</a></li>
+              <li>Email: <a href="mailto:info@house18.com">info@house18.com</a></li>
               <li>Location: Sweden</li>
               <li><a href="https://github.com/nickem00/house-18" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
