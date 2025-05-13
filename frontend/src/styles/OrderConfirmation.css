@@ -1,0 +1,132 @@
+.order-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  margin-top: 10rem; /* Important spacing to avoid header overlap */
+  margin-bottom: 5rem;
+  padding: 0 2rem;
+}
+
+.order-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.order-container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.order-message {
+  /* background-color: var(--box-color); */
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.order-message p {
+  margin: 0.5rem 0;
+}
+
+/* Flex container for side-by-side layout */
+.order-flex-container {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+
+.order-shipping {
+  flex: 1;
+}
+
+.order-summary {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.order-shipping-address, .order-summary {
+    /* background-color: var(--box-color); */
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(119, 119, 119, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.order-shipping-address h2,
+.order-summary h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.order-address-details {
+  padding: 1.5rem;
+  /* background-color: var(--box-color); */
+  border-radius: 5px;
+}
+
+.order-address-details p {
+  margin: 0.5rem 0;
+}
+
+/* Order Summary Styling */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.order-item-details {
+  display: flex;
+  gap: 1rem;
+}
+
+.order-summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+.order-summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  border-top: 2px solid rgba(117, 117, 117, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-flex-container {
+    flex-direction: column;
+  }
+  
+  .order-shipping,
+  .order-summary {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+  }
+
+  .order-container {
+    padding: 0 1rem;
+  }
+  
+  .order-content {
+    padding: 0 0.5rem;
+  }
+}

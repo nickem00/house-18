@@ -180,4 +180,31 @@ const updateOrderStatus = async (req, res) => {
     }
 };
 
-export { createOrder, getAllOrders, getOrderByUserID, updateOrderStatus };
+const getOrderById = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: 'Order ID is required' });
+    }
+
+    try {
+        const order = await Order.findOne({ order_id: id })
+            .populate('user_id', 'username email')
+            .populate('items.product', 'name price images');
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        if (!req.user.isAdmin && req.user.user_id !== order.user_id.user_id) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        return res.status(200).json(order);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
+export { createOrder, getAllOrders, getOrderByUserID, updateOrderStatus, getOrderById };

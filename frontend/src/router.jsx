@@ -10,6 +10,7 @@ import LoginRegister from "./pages/LoginRegister";
 import Admin from './pages/Admin';
 import ProtectedAdminRoute from "./features/ProtectedAdminRoute";
 import ProfilePage from "./pages/ProfilePage";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
             { path: "Login-Register", element: <LoginRegister /> },
             { path: 'admin', element: <ProtectedAdminRoute><Admin /></ProtectedAdminRoute> },
             { path: "profile", element: <ProfilePage /> },
+            { path: "order-confirmation/:id", element: <OrderConfirmation /> },
         ],
     },
 ]);
