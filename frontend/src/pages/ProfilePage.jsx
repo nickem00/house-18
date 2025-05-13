@@ -2,11 +2,14 @@ import '../styles/ProfilePage.css';
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { fetchUserInfo } from "../features/ProfilePage/fetchUserInfo";
+import { isAdmin } from "../features/isAdmin";
+import { logout } from "../features/logout";
 
 export default function ProfilePage() {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [userIsAdmin, setUserIsAdmin] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,15 +24,19 @@ export default function ProfilePage() {
                 }
             } else {
                 setUserData(result.user);
+                // Check if user is admin
+                setUserIsAdmin(isAdmin());
             }
             setLoading(false);
         };
 
         loadUserData();
-    }, [navigate]);
-
-    if (loading) return <div className="profile-page-container">Loading user information...</div>;
+    }, [navigate]);    if (loading) return <div className="profile-page-container">Loading user information...</div>;
     if (error) return <div className="profile-page-container">Error: {error}</div>;
+
+    const handleLogout = () => {
+        logout(navigate);
+    };
 
     return (
         <div className="profile-page-container">
@@ -47,8 +54,15 @@ export default function ProfilePage() {
                             </div>
                         )}
                     </div>
-                    <Link to="/admin" className="profile-admin-dashboard-btn">Admin Dashboard</Link>
-                </div>                <div className='profile-liked-products'>
+                    <div className="profile-buttons">
+                        {userIsAdmin && (
+                            <Link to="/admin" className="profile-admin-dashboard-btn">Admin Dashboard</Link>
+                        )}
+                        <button onClick={handleLogout} className="profile-logout-btn">Log Out</button>
+                    </div>
+                </div>
+                
+                <div className='profile-liked-products'>
                     <h2>Liked Products:</h2>
                     {userData && userData.likedProducts && userData.likedProducts.length > 0 ? (
                         <ul>
@@ -63,12 +77,14 @@ export default function ProfilePage() {
                     ) : (
                         <p>No liked products found.</p>
                     )}
-                </div>                <div className='profile-orders'>
+                </div>
+
+                <div className='profile-orders'>
                     <h2>Your Orders:</h2>
                     {userData && userData.orderHistory && userData.orderHistory.length > 0 ? (
-                        <ul>
+                        <ul className='order-cards-list'>
                             {userData.orderHistory.map((order) => (
-                                <li key={order.order_id}>
+                                <li key={order.order_id} className='order-card'>
                                     <p><strong>Order ID:</strong> {order.order_id}</p>
                                     <p><strong>Total Price:</strong> ${order.total}</p>
                                     <p><strong>Status:</strong> {order.status}</p>

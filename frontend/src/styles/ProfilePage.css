@@ -33,19 +33,34 @@ body.light-mode .profile-summary {
                 0 -6px 6px -6px rgba(0, 0, 0, 0.4);
 }
 
-.profile-admin-dashboard-btn {
-    background-color: #00000000;
-    color: var(--text-color);
-    border: 1px solid var(--accent-color);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    height: fit-content;
-    transition: all 0.2s ease;
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.profile-admin-dashboard-btn:hover {
-    background-color: var(--accent-color);;
+.profile-admin-dashboard-btn, .profile-logout-btn {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.profile-admin-dashboard-btn:hover, .profile-logout-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.profile-logout-btn {
+    border: 1px solid var(--accent-color);
+    background-color: transparent;
 }
 
 .profile-content {
@@ -89,15 +104,28 @@ body.light-mode .profile-orders {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-body.light-mode .profile-liked-products li, 
+/* body.light-mode .profile-liked-products li, 
 body.light-mode .profile-orders li {
     background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.1);
-}
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+} */
 
 .profile-liked-products li:hover, .profile-orders li:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .order-card {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .order-card:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .order-items {
@@ -118,4 +146,26 @@ body.light-mode .profile-orders li {
 .order-items li:hover {
     transform: none;
     box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .profile-page-container {
+        padding: 0 1rem;
+    }
+
+    .profile-summary-button-container {
+        flex-direction: column-reverse;
+        /* align-items: center; */
+        gap: 1rem;
+    }
+
+    .profile-buttons {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .profile-content {
+        margin-top: 1rem;
+    }
+    
 }
