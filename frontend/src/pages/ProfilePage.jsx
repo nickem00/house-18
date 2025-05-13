@@ -66,11 +66,11 @@ export default function ProfilePage() {
                     <h2>Liked Products:</h2>
                     {userData && userData.likedProducts && userData.likedProducts.length > 0 ? (
                         <ul>
-                            {userData.likedProducts.map((product) => (
+                            {userData.likedProducts.map((product) => (                                
                                 <li key={product.product_id}>
                                     <p><strong>{product.name}</strong></p>
                                     <p>{product.description}</p>
-                                    <p>Price: ${product.price}</p>
+                                    <p>Price: {product.price} kr</p>
                                 </li>
                             ))}
                         </ul>
@@ -84,16 +84,16 @@ export default function ProfilePage() {
                     {userData && userData.orderHistory && userData.orderHistory.length > 0 ? (
                         <ul className='order-cards-list'>
                             {userData.orderHistory.map((order) => (
-                                <li key={order.order_id} className='order-card'>
-                                    <p><strong>Order ID:</strong> {order.order_id}</p>
-                                    <p><strong>Total Price:</strong> ${order.total}</p>
+                                <li key={order.order_id} className='order-card'>                                    
+                                <p><strong>Order ID:</strong> {order.order_id}</p>
+                                    <p><strong>Total Price:</strong> {order.total} kr</p>
                                     <p><strong>Status:</strong> {order.status}</p>
                                     <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
                                     <div className="order-items">
                                         <p><strong>Items:</strong></p>
                                         <ul>
                                             {order.items.map((item, index) => (
-                                                <li key={index}>
+                                                <li key={index} className='order-item'>
                                                     <p>{item.product.name} - Size: {item.size}, Qty: {item.quantity}</p>
                                                 </li>
                                             ))}
