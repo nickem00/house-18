@@ -1,111 +1,102 @@
 import '../styles/ProfilePage.css';
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchUserInfo } from "../features/ProfilePage/fetchUserInfo";
 import { isAdmin } from "../features/isAdmin";
 import { logout } from "../features/logout";
+import UserInfo from "../components/ProfilePage/UserInfo";
+import LikedProducts from "../components/ProfilePage/LikedProducts";
+import OrderHistory from "../components/ProfilePage/OrderHistory";
 
 export default function ProfilePage() {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userIsAdmin, setUserIsAdmin] = useState(false);
+    const [removingProductId, setRemovingProductId] = useState(null);
     const navigate = useNavigate();
+    const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
 
-    useEffect(() => {
-        const loadUserData = async () => {
-            setLoading(true);
-            const result = await fetchUserInfo();
-            
-            if (result.error) {
-                setError(result.error);
-                if (result.error === "User is not logged in") {
-                    navigate("/Login-Register");
-                }
-            } else {
-                setUserData(result.user);
-                // Check if user is admin
-                setUserIsAdmin(isAdmin());
+    const loadUserData = async () => {
+        setLoading(true);
+        const result = await fetchUserInfo();
+        
+        if (result.error) {
+            setError(result.error);
+            if (result.error === "User is not logged in") {
+                navigate("/Login-Register");
             }
-            setLoading(false);
-        };
-
+        } else {
+            setUserData(result.user);
+            // Check if user is admin
+            setUserIsAdmin(isAdmin());
+        }
+        setLoading(false);    };
+    
+    useEffect(() => {
         loadUserData();
-    }, [navigate]);    if (loading) return <div className="profile-page-container">Loading user information...</div>;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [navigate]);
+    
+    if (loading) return <div className="profile-page-container">Loading user information...</div>;
     if (error) return <div className="profile-page-container">Error: {error}</div>;
-
+    
     const handleLogout = () => {
         logout(navigate);
     };
+    
+    const unlikeProduct = async (productId) => {
+        try {
+            setRemovingProductId(productId);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError("You must be logged in to unlike a product");
+                setRemovingProductId(null);
+                return;
+            }
+              const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
+            const response = await fetch(`${URL}/api/favorites/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to unlike product");
+            }
+            
+            // Refresh user data to update the liked products list
+            await loadUserData();
+        } catch (error) {
+            console.error("Error unliking product:", error);
+            setError(error.message);
+        } finally {
+            setRemovingProductId(null);
+        }
+    };
+    
     return (
         <div className="profile-page-container">
             <h1>Your Profile</h1>
             <div className="profile-content">
+                <UserInfo 
+                    userData={userData} 
+                    userIsAdmin={userIsAdmin} 
+                    handleLogout={handleLogout}
+                />
                 
-                <div className="profile-summary-button-container">
-                    <div className="profile-summary">
-                        <h2>Your info:</h2>
-                        {userData && (
-                            <div className="user-info">
-                                <p><strong>Username:</strong> {userData.username}</p>
-                                <p><strong>Email:</strong> {userData.email}</p>
-                                <p><strong>User ID:</strong> {userData.user_id}</p>
-                            </div>
-                        )}
-                    </div>
-                    <div className="profile-buttons">
-                        {userIsAdmin && (
-                            <Link to="/admin" className="profile-admin-dashboard-btn">Admin Dashboard</Link>
-                        )}
-                        <button onClick={handleLogout} className="profile-logout-btn">Log Out</button>
-                    </div>
-                </div>
-                
-                <div className='profile-liked-products'>
-                    <h2>Liked Products:</h2>
-                    {userData && userData.likedProducts && userData.likedProducts.length > 0 ? (
-                        <ul>
-                            {userData.likedProducts.map((product) => (                                
-                                <li key={product.product_id}>
-                                    <p><strong>{product.name}</strong></p>
-                                    <p>{product.description}</p>
-                                    <p>Price: {product.price} kr</p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No liked products found.</p>
-                    )}
-                </div>
+                <LikedProducts 
+                    likedProducts={userData?.likedProducts || []} 
+                    removingProductId={removingProductId}
+                    unlikeProduct={unlikeProduct}
+                />
 
-                <div className='profile-orders'>
-                    <h2>Your Orders:</h2>
-                    {userData && userData.orderHistory && userData.orderHistory.length > 0 ? (
-                        <ul className='order-cards-list'>
-                            {userData.orderHistory.map((order) => (
-                                <li key={order.order_id} className='order-card'>                                    
-                                <p><strong>Order ID:</strong> {order.order_id}</p>
-                                    <p><strong>Total Price:</strong> {order.total} kr</p>
-                                    <p><strong>Status:</strong> {order.status}</p>
-                                    <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
-                                    <div className="order-items">
-                                        <p><strong>Items:</strong></p>
-                                        <ul>
-                                            {order.items.map((item, index) => (
-                                                <li key={index} className='order-item'>
-                                                    <p>{item.product.name} - Size: {item.size}, Qty: {item.quantity}</p>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No orders found.</p>
-                    )}
-                </div>
+                <OrderHistory
+                    orders={userData?.orderHistory || []}
+                />
             </div>
         </div>
     );
