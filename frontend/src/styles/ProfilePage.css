@@ -113,6 +113,54 @@ body.light-mode .profile-orders {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.unlike-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.liked-product-card:hover .unlike-button {
+    opacity: 1;
+}
+
+.unlike-button:hover {
+    background-color: rgba(220, 20, 60, 0.9);
+    transform: scale(1.1);
+}
+
+.unlike-button.loading {
+    pointer-events: none;
+    animation: pulse 1.5s infinite;
+    background-color: rgba(128, 128, 128, 0.7);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
 }
 
 .liked-product-card:hover {
@@ -167,6 +215,19 @@ body.light-mode .profile-orders {
 body.light-mode .liked-product-card {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .unlike-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+body.light-mode .unlike-button:hover {
+    background-color: rgba(220, 20, 60, 0.9);
+}
+
+body.light-mode .unlike-button.loading {
+    background-color: rgba(100, 100, 100, 0.7);
 }
 
 .no-image {
