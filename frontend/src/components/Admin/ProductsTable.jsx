@@ -58,7 +58,7 @@ export default function ProductsTable({ products, onDelete, onUpdate, onEditClic
             {expandedRows[p.id] && p.originalData && p.originalData.variants && (
               <tr className="variant-row">
                 <td colSpan="7">
-                  <div className="variants-container">
+                  <article className="variants-container">
                     <table className="variants-table first">
                       <thead>
                         <tr>
@@ -89,7 +89,7 @@ export default function ProductsTable({ products, onDelete, onUpdate, onEditClic
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </article>
                 </td>
               </tr>
             )}

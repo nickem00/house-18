@@ -10,7 +10,7 @@ export default function LoginRegisterForm({
 }) {
   return (
     <form className="login-register-form" onSubmit={onSubmit} noValidate>
-      <div className={`fields login-fields ${mode === "login" ? "show" : "hide"}`}>
+      <section className={`fields login-fields ${mode === "login" ? "show" : "hide"}`}>
         <InputField
           label="Email or Username"
           name="emailOrUsername"
@@ -28,9 +28,9 @@ export default function LoginRegisterForm({
           onChange={onChange}
         />
         {errors.password && <p className="error">{errors.password}</p>}
-      </div>
+      </section>
 
-      <div className={`fields register-fields ${mode === "register" ? "show" : "hide"}`}>
+      <section className={`fields register-fields ${mode === "register" ? "show" : "hide"}`}>
         <InputField
           label="Username"
           name="username"
@@ -65,7 +65,7 @@ export default function LoginRegisterForm({
           onChange={onChange}
         />
         {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
-      </div>
+      </section>
 
       <button type="submit">
         {mode === "login" ? "Login" : "Register"}
