@@ -24,7 +24,7 @@ export default function ProfilePage() {
         if (result.error) {
             setError(result.error);
             if (result.error === "User is not logged in") {
-                navigate("/Login-Register");
+                navigate("/login-register");
             }
         } else {
             setUserData(result.user);

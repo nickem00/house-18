@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             { path: "*", element: <NotFound /> },
             { path: "Store", element: <Store /> },
             { path: "products/:id", element: <ProductPage />},
-            { path: "Login-Register", element: <LoginRegister /> },
+            { path: "login-register", element: <LoginRegister /> },
             { path: 'admin', element: <ProtectedAdminRoute><Admin /></ProtectedAdminRoute> },
             { path: "profile", element: <ProfilePage /> },
             { path: "order-confirmation/:id", element: <OrderConfirmation /> },
