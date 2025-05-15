@@ -225,7 +225,7 @@ export default function Admin() {
 
 
   return (
-    <div className="admin-page-container">
+    <section className="admin-page-container">
       <article className="admin-article">
         <h2>Admin Dashboard</h2>
         <button className="link-button" onClick={handleLogout}>Logout</button>
@@ -285,6 +285,6 @@ export default function Admin() {
           </div>
         )}
       </section>
-    </div>
+    </section>
   );
 }

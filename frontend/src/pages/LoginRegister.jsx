@@ -119,7 +119,7 @@ export default function LoginRegister() {
   };
 
   return (
-    <div className="login-register-container">
+    <section className="login-register-container">
       <LoginRegisterTabs mode={mode} setMode={setMode} />
 
       {errors.general && <p className="error-general">{errors.general}</p>}
@@ -131,6 +131,6 @@ export default function LoginRegister() {
         onSubmit={handleSubmit}
         errors={errors}
       />
-    </div>
+    </section>
   );
 }

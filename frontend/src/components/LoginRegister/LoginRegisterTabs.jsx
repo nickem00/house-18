@@ -2,7 +2,7 @@ import React from "react";
 
 export default function LoginRegisterTabs({ mode, setMode }) {
   return (
-    <div className="login-register-tabs">
+    <section className="login-register-tabs">
       <button
         className={mode === "login" ? "active" : ""}
         onClick={() => setMode("login")}
@@ -15,6 +15,6 @@ export default function LoginRegisterTabs({ mode, setMode }) {
       >
         Register
       </button>
-    </div>
+    </section>
   );
 }

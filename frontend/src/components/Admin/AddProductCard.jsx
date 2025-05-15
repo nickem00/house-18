@@ -165,7 +165,7 @@ export default function AddProductCard({ onAdd, initialValues = {} }) {
 
       <h3>Variants</h3>
       {form.variants.map((variant, index) => (
-        <div key={index} className="variant-row">
+        <article key={index} className="variant-row">
           <select
             value={variant.size}
             onChange={(e) => handleVariantChange(index, 'size', e.target.value)}
@@ -192,7 +192,7 @@ export default function AddProductCard({ onAdd, initialValues = {} }) {
           >
             Remove
           </button>
-        </div>
+        </article>
       ))}
       <button type="button" onClick={addVariant} className="add-variant-btn">
         Add Size Variant

@@ -10,7 +10,7 @@ export default function InputField({
   placeholder,
 }) {
   return (
-    <div className="input-group">
+    <article className="input-group">
       <input
         name={name}
         type={type}
@@ -19,6 +19,6 @@ export default function InputField({
         onChange={onChange}
         className="input-field"
       />
-    </div>
+    </article>
   );
 }
