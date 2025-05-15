@@ -6,7 +6,7 @@ import '../../styles/ProfilePage.css';
 
 export default function LikedProducts({ likedProducts, removingProductId, unlikeProduct }) {
     return (
-        <div className='profile-liked-products'>
+        <div id='#liked-products' className='profile-liked-products'>
             <h2>Liked Products:</h2>
             {likedProducts && likedProducts.length > 0 ? (
                 <ul className="liked-products-grid">

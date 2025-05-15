@@ -55,7 +55,7 @@ export default function Header({ setIsCartOpen, isCartOpen }) {
                                 <li>
                                     <ul className="icons-list">
                                         <li>
-                                            <Link className="icon" to={token ? "/Profile" : "/Login-Register"}>
+                                            <Link className="icon" to={token ? "/profile" : "/login-register"}>
                                                 <FontAwesomeIcon icon={['far', 'user']} />
                                             </Link>
                                         </li>
@@ -70,7 +70,7 @@ export default function Header({ setIsCartOpen, isCartOpen }) {
                                         <li>
                                             <Link
                                                 className="icon"
-                                                to="/wishlist"
+                                                to="/profile/#liked-products"
                                                 onMouseEnter={() => setIsHeartHovered(true)}
                                                 onMouseLeave={() => setIsHeartHovered(false)}
                                             >
