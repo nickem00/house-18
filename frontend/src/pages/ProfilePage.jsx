@@ -61,16 +61,25 @@ export default function ProfilePage() {
                         <button onClick={handleLogout} className="profile-logout-btn">Log Out</button>
                     </div>
                 </div>
-                
-                <div className='profile-liked-products'>
+                  <div className='profile-liked-products'>
                     <h2>Liked Products:</h2>
                     {userData && userData.likedProducts && userData.likedProducts.length > 0 ? (
-                        <ul>
+                        <ul className="liked-products-grid">
                             {userData.likedProducts.map((product) => (                                
-                                <li key={product.product_id}>
-                                    <p><strong>{product.name}</strong></p>
-                                    <p>{product.description}</p>
-                                    <p>Price: {product.price} kr</p>
+                                <li key={product.product_id} className="liked-product-card">
+                                    <Link to={`/products/${product.product_id}`} className="liked-product-link">
+                                        <div className="liked-product-image">
+                                            {product.images && product.images.length > 0 ? (
+                                                <img src={product.images[0]} alt={product.name} />
+                                            ) : (
+                                                <div className="no-image">No Image</div>
+                                            )}
+                                        </div>
+                                        <div className="liked-product-info">
+                                            <p className="liked-product-name"><strong>{product.name}</strong></p>
+                                            <p className="liked-product-price">{product.price} kr</p>
+                                        </div>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

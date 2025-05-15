@@ -96,17 +96,98 @@ body.light-mode .profile-orders {
     gap: 1.5rem;
 }
 
-.profile-liked-products li, .profile-orders li {
-    padding: 1rem;
-    /* border-radius: 8px; */
+.liked-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.liked-product-card {
     background-color: rgba(51, 51, 51, 0.3);
-    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.liked-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.liked-product-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.liked-product-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.liked-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.liked-product-card:hover .liked-product-image img {
+    transform: scale(1.05);
+}
+
+.liked-product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.liked-product-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+.liked-product-price {
+    margin: 0;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+body.light-mode .liked-product-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2a2a;
+    color: #ccc;
+}
+
+/* Order card specific styling. We keep the original style for order cards, and have a separate style for liked products */
+.profile-orders li {
+    padding: 1rem;
+    background-color: rgba(51, 51, 51, 0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.2s ease;
 }
 
-/* Light mode styling for the product cards */
-body.light-mode .profile-liked-products li, 
+/* Light mode styling for the order cards */
 body.light-mode .profile-orders li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: transparent;
@@ -114,12 +195,12 @@ body.light-mode .profile-orders li {
     transition: transform 0.2s ease;
 }
 
-.profile-liked-products li:hover, .profile-orders li:hover {
+.profile-orders li:hover {
     transform: translateY(-3px);
 }
 
-/* Individual product and order item styling */
-.profile-liked-products li p, .profile-orders li p {
+/* Individual order item styling */
+.profile-orders li p {
     margin: 0.5rem 0;
 }
 
@@ -127,19 +208,18 @@ body.light-mode .profile-orders li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.profile-liked-products li p:first-child, 
 .profile-orders li p:first-child {
     margin-bottom: 0.5rem;
 }
 
-/* Add a subtle separator between products information */
-.profile-liked-products li p:nth-child(2) {
+/* Add a subtle separator between order information */
+.profile-orders li p:nth-child(2) {
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
 }
 
-body.light-mode .profile-liked-products li p:nth-child(2) {
+body.light-mode .profile-orders li p:nth-child(2) {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
 }
 
