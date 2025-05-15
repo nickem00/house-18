@@ -225,6 +225,31 @@
     top: 300px;
 }
 
+@media (max-width: 1280px) {
+  /* 2) Låt bilderna i about-store wrap: a istället för att skära av */
+  .about-store-image-container,
+  .about-us-image-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .about-us-title {
+    font-size: 3rem;
+    color: var(--text-color);
+    font-weight: 300;
+    text-align: center;
+    margin: 5rem 0 5rem 0;
+    letter-spacing: 2px;
+  }
+
+  .about-us-image-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  }
+}
 
 /* === Responsive (max-width: 768px) === */
 @media (max-width: 768px) {
