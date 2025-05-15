@@ -19,7 +19,7 @@ export default function AboutUsSection() {
                 <TeamCard 
                     name="Jacob" 
                     role="Technical Implementation Generalist" 
-                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/v1746616899/Screenshot_2025-05-03_161953_upzejn.png" 
+                    image="https://res.cloudinary.com/dzcqnchjm/image/upload/IMG_2275_zsk7jp.jpg" 
                 />
                 <TeamCard 
                     name="Pontus" 
