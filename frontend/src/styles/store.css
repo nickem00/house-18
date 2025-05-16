@@ -138,6 +138,7 @@
   margin-top: 0.3em;
   font-size: 13px;
   color: #696767;
+  margin-bottom: 0;
 }
 
 .product-name {
@@ -151,6 +152,16 @@
 .product-price{
   max-width: 200px;
   font-weight: 300;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 50%;
+}
+
+.favorite-icon{
+  cursor: pointer;
 }
 
 /*========Responsive Design========*/
