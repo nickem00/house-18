@@ -100,11 +100,20 @@
   border-radius: 8px;
   font-size: 1.1em;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
-.favorite-btn:focus{
+.favorite-icon{
   transition: all 0.3s ease;
 }
+
+.favorite-icon.active {
+  color: #B47C54;
+}
+.favorite-icon.loading {
+  opacity: 0.5;
+}
+
 
 .size-menu {
   background-color: #B47C5400;
@@ -135,33 +144,6 @@
 .productSite-description {
   max-width: 25em;
   font-weight: 200;
-}
-
-.product-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  width: 25em;
-}
-
-.product-header .favorite-icon {
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--text-color);
-  transition: all 0.3s ease;
-}
-
-.product-header .favorite-icon.active {
-  color: #B47C54;
-}
-
-.product-header .favorite-icon.loading {
-  opacity: 0.5;
-}
-
-.product-header .favorite-icon:hover {
-  transform: scale(1.1);
 }
 
 /*========Responsive Design========*/

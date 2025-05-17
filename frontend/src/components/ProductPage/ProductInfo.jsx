@@ -1,5 +1,5 @@
 import { useCart } from "../../context/useCart"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +9,9 @@ export default function ProductInfo({product}){
     const { addToCart } = useCart();
     const [selectedSize, setSelectedSize] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(null);
-
-        /*useEffect(() => {
+    
+useEffect(() => {
         const checkFavoriteStatus = async () => {
             try {
                 const token = localStorage.getItem('token');
@@ -35,7 +34,7 @@ export default function ProductInfo({product}){
         };
 
         checkFavoriteStatus();
-    }, [product.product_id]);*/
+    }, [product.product_id]);
     
     const toggleFavorite = async (productId) => {
         try {
@@ -58,11 +57,9 @@ export default function ProductInfo({product}){
                 });
 
                 if (!response.ok) {
-                    console.error("Failed to remove from favorites");
-                }
+                    console.error("Failed to remove from favorites");                }
 
                 setIsLiked(false);
-                localStorage.removeItem(`favorite_${productId}`);
             } else {
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'POST',
@@ -77,11 +74,9 @@ export default function ProductInfo({product}){
                 }
 
                 setIsLiked(true);
-            }
-
+            }        
         } catch (error) {
             console.error("Error:", error);
-            setError(error.message);
         } finally {
             setIsLoading(false);
         }
@@ -143,7 +138,7 @@ export default function ProductInfo({product}){
                     >
                     <FontAwesomeIcon
                         icon={isLiked ? faHeartSolid : faHeart}
-                        className="icon"
+                        className={`favorite-icon ${isLiked ? 'active' : ''} ${isLoading ? 'loading' : ''}`}
                     />
                 </button>
             </section>
