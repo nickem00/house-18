@@ -189,7 +189,7 @@ const getOrderById = async (req, res) => {
 
     try {
         const order = await Order.findOne({ order_id: id })
-            .populate('user_id', 'username email')
+            .populate('user_id', 'username email user_id')
             .populate('items.product', 'name price images');
 
         if (!order) {
