@@ -61,41 +61,61 @@
 }
 
 .add-to-cart-btn {
-    background-color: #A06A4B; 
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    width: 25em;
-    border-radius: 8px;
-    border: 1px solid #B47C54;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
+  background-color: #A06A4B; 
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  width: 22em;
+  border-radius: 8px;
+  border: 1px solid #B47C54;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.actions-btns-container {
+  max-width: 400px;  
 }
 
 .add-to-cart-btn:hover {
-    background-color: #B47C5400;
-    border: 1px solid #B47C54;
-    color: var(--text-color);
-    cursor: pointer;
+  background-color: #B47C5400;
+  border: 1px solid #B47C54;
+  color: var(--text-color);
+  cursor: pointer;
 }
 
 .product-actions {
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 0rem;
+}
+
+.favorite-btn {
+  cursor: pointer;
+  border: 1px solid var(--text-color);
+  width: 2.9rem;
+  background: none;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  color: var(--text-color);
+  margin-left: 0.7rem;
+  border-radius: 8px;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.favorite-btn:focus{
+  transition: all 0.3s ease;
 }
 
 .size-menu {
-    background-color: #B47C5400;
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    width: 25em;
-    border-radius: 8px;
-    border: 1px solid var(--text-color);
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
+  background-color: #B47C5400;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  width: 25em;
+  border-radius: 8px;
+  border: 1px solid var(--text-color);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
 }
 
 .size-menu option {
@@ -232,10 +252,11 @@
     margin-bottom: 0.5rem;
   }
 
-  .size-menu,
+  .size-menu {
+    max-width: 15em;
+  }
   .add-to-cart-btn {
-    width: 100%;
-    max-width: 320px;
+    max-width: 12em;
   }
 
   .shipping-and-details {
