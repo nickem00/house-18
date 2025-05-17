@@ -1,5 +1,5 @@
 import { useCart } from "../../context/useCart"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
@@ -9,9 +9,10 @@ export default function ProductInfo({product}){
     const { addToCart } = useCart();
     const [selectedSize, setSelectedSize] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
+    const [error, setError] = useState(null);
+    const [isLiked, setIsLiked] = useState(null);
 
-    useEffect(() => {
+        /*useEffect(() => {
         const checkFavoriteStatus = async () => {
             try {
                 const token = localStorage.getItem('token');
@@ -34,7 +35,7 @@ export default function ProductInfo({product}){
         };
 
         checkFavoriteStatus();
-    }, [product.product_id]);
+    }, [product.product_id]);*/
     
     const toggleFavorite = async (productId) => {
         try {
@@ -61,6 +62,7 @@ export default function ProductInfo({product}){
                 }
 
                 setIsLiked(false);
+                localStorage.removeItem(`favorite_${productId}`);
             } else {
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'POST',
@@ -79,19 +81,15 @@ export default function ProductInfo({product}){
 
         } catch (error) {
             console.error("Error:", error);
+            setError(error.message);
         } finally {
             setIsLoading(false);
         }
-    };    return(
+    };
+
+    return(
         <section className="product-info">
-            <div className="product-header">
-                <h4 className="product-title">{product.name}</h4>
-                <FontAwesomeIcon 
-                    icon={isLiked ? faHeartSolid : faHeart}
-                    onClick={() => toggleFavorite(product.product_id)}
-                    className={`favorite-icon ${isLiked ? 'active' : ''} ${isLoading ? 'loading' : ''}`}
-                />
-            </div>
+            <h4 className="product-title">{product.name}</h4>
             <p>{product.price}kr</p>
 
             <section className="product-actions"  defaultValue="SIZE">
@@ -111,30 +109,45 @@ export default function ProductInfo({product}){
                         {variant.size} {variant.stock === 0 ? "(out of stock)" : ""}
                     </option>
                 ))}
-            </select>
+            </select>          
 
-            <button className="add-to-cart-btn" 
-            onClick={() => {
-
-                if (!selectedSize) {
-                    alert("You have to choose a size before adding to cart")
+            <section className="actions-row">
+                <button
+                className="add-to-cart-btn"
+                onClick={() => {
+                    if (!selectedSize) {
+                    alert("You have to choose a size before adding to cart");
                     return;
-                }
-                
-                const cartItem = {
-                product_id: product.product_id,
-                name: product.name,
-                price: product.price,
-                image: product.images[0],
-                size: selectedSize, 
-                quantity: 1
-                }
-                
-                addToCart(cartItem);
-                setSelectedSize("");
-                
-                }} >ADD TO CART</button>
+                    }
+
+                    const cartItem = {
+                    product_id: product.product_id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images[0],
+                    size: selectedSize,
+                    quantity: 1,
+                    };
+
+                    addToCart(cartItem);
+                    setSelectedSize("");
+                }}
+                >
+                ADD TO CART
+                </button>
+
+                <button
+                    className="favorite-btn"
+                    onClick={() => toggleFavorite(product.product_id)}
+                    disabled={isLoading}
+                    >
+                    <FontAwesomeIcon
+                        icon={isLiked ? faHeartSolid : faHeart}
+                        className="icon"
+                    />
+                </button>
             </section>
+            </section>           
 
             <ul className="shipping-and-details">
                 <li>✔ Free shipping over 499 kr</li>
