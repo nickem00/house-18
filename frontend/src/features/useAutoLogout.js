@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
@@ -6,11 +6,11 @@ export function useAutoLogout() {
   const navigate = useNavigate();
   const logoutTimerRef = useRef();
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem("token");
     localStorage.setItem("loggedIn", "false");
     navigate("/login-register");
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,5 +31,5 @@ export function useAutoLogout() {
 
     // Rensa timer om komponenten avmonteras
     return () => clearTimeout(logoutTimerRef.current);
-  }, [navigate]);
+  }, [logout]);
 }

@@ -81,4 +81,30 @@ const getFavorites = async (req, res) => {
     }
 };
 
-export { addFavorite, removeFavorite, getFavorites };
+// Check if product is in favorites
+const checkFavorite = async (req, res) => {
+    const userId = req.user.user_id;
+    const productId = req.params.productId;
+
+    try {
+        const user = await User.findOne({ user_id: userId });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Find the product by product_id
+        const product = await Product.findOne({ product_id: productId });
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        // Check if the product is in the user's favorites
+        const isFavorite = user.likedProducts.some(id => id.toString() === product._id.toString());
+        
+        res.status(200).json({ isFavorite });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
+export { addFavorite, removeFavorite, getFavorites, checkFavorite };
