@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function ProductsTable({ products, onDelete, onUpdate, onEditClick }) {
+export default function ProductsTable({ products, onDelete, onEditClick }) {
   const [expandedRows, setExpandedRows] = useState({});
 
   const toggleRowExpansion = (id) => {

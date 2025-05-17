@@ -6,10 +6,9 @@ import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductCard({product}) {
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [isLiked, setIsLiked] = useState(null);
+    const [isLiked, setIsLiked] = useState(false);
 
-    /*useEffect(() => {
+    useEffect(() => {
         const checkFavoriteStatus = async () => {
             try {
                 const token = localStorage.getItem('token');
@@ -32,7 +31,7 @@ export default function ProductCard({product}) {
         };
 
         checkFavoriteStatus();
-    }, [product.product_id]);*/
+    }, [product.product_id]);
     
     const toggleFavorite = async (productId) => {
         try {
@@ -55,11 +54,9 @@ export default function ProductCard({product}) {
                 });
 
                 if (!response.ok) {
-                    console.error("Failed to remove from favorites");
-                }
+                    console.error("Failed to remove from favorites");                }
 
                 setIsLiked(false);
-                localStorage.removeItem(`favorite_${productId}`);
             } else {
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'POST',
@@ -74,11 +71,9 @@ export default function ProductCard({product}) {
                 }
 
                 setIsLiked(true);
-            }
-
+            }        
         } catch (error) {
             console.error("Error:", error);
-            setError(error.message);
         } finally {
             setIsLoading(false);
         }

@@ -67,16 +67,16 @@ export default function ContactSection() {
         <section className='contact-section' id='contact'>
             <div className="contact-container">
                 <form className="contact-form" onSubmit={handleSubmit}>
-                    <input type="text" name="name" placeholder='name' value={formData.name} onChange={handleChange} />
+                    <input type="text" name="name" placeholder='Name' value={formData.name} onChange={handleChange} />
                     {errors.name && <small style={{ color: 'red' }}>{errors.name}</small>}
 
-                    <input type="email" name='email' placeholder='email' value={formData.email} onChange={handleChange} />
+                    <input type="email" name='email' placeholder='Email' value={formData.email} onChange={handleChange} />
                     {errors.email && <small style={{ color: 'red' }}>{errors.email}</small>}
 
-                    <input type="text" name="subject" placeholder='subject' value={formData.subject} onChange={handleChange} />
+                    <input type="text" name="subject" placeholder='Subject' value={formData.subject} onChange={handleChange} />
                     {errors.subject && <small style={{ color: 'red' }}>{errors.subject}</small>}
 
-                    <textarea name="message" placeholder='message' value={formData.message} onChange={handleChange}></textarea>
+                    <textarea name="message" placeholder='Message' value={formData.message} onChange={handleChange}></textarea>
                     {errors.message && <small style={{ color: 'red' }}>{errors.message}</small>}
 
                     <button type='submit' className='contact-send-btn'>SEND MESSAGE</button>
