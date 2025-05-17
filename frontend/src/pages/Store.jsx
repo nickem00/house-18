@@ -5,7 +5,7 @@ import ProductGrid from "../components/Store/ProductGrid";
 import getCategoryCount from "../features/categoryCount";
 
 export default function Store() {
-    const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+    const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
     const [products, setProducts] = useState([]);
     const [categoryCounts, setCategoryCounts] = useState({});
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -18,9 +18,9 @@ export default function Store() {
                 setCategoryCounts(getCategoryCount(data));
             })
             .catch((err)=> 
-                console.error('Error occured while fetching products: ', err));
+                console.error('Error occurred while fetching products: ', err));
 
-    }, []);
+    }, [URL]);
 
     let filteredProducts = products;
 
