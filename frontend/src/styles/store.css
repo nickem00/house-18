@@ -160,8 +160,23 @@
   gap: 50%;
 }
 
-.favorite-icon{
+.icon-container .favorite-icon {
   cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.icon-container .favorite-icon.active {
+  color: #B47C54;
+}
+
+.icon-container .favorite-icon.loading {
+  opacity: 0.5;
+}
+
+.icon-container .favorite-icon:hover {
+  transform: scale(1.1);
 }
 
 /*========Responsive Design========*/
