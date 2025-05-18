@@ -8,7 +8,9 @@ export default function CategorySidebar({ categoryCounts, categorySelect}){
                 {categories.map((category)=>(
                     <li key={category}>
                        <button className="category-btn" onClick={()=>categorySelect(category)}
-                       >{category} <span>({categoryCounts[category] || 0})</span></button>
+                       
+                       >{/* Show count of products in category, default to 0 if none */}
+                        {category} <span>({categoryCounts[category] || 0})</span></button>
                     </li>
                 ))}
             </ul>
