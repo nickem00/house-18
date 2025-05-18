@@ -1,10 +1,13 @@
 import React from 'react';
 import '../../styles/ProfilePage.css';
 
+// Component for the Order History section of the profile page.
+// Displays a list of orders made by the user.
 export default function OrderHistory({ orders }) {
     return (
         <div className='profile-orders'>
             <h2>Your Orders:</h2>
+            {/* If orders are found, return this */}
             {orders && orders.length > 0 ? (
                 <ul className='order-cards-list'>
                     {orders.map((order) => (
@@ -27,6 +30,7 @@ export default function OrderHistory({ orders }) {
                     ))}
                 </ul>
             ) : (
+                // If no orders are found, display a message
                 <p>No orders found.</p>
             )}
         </div>

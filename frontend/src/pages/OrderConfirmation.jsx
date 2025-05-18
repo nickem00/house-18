@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import '../styles/OrderConfirmation.css';
 
+// The page compontent for the order confirmation page
+// This page is displayed after a successful order placement.
 export default function OrderConfirmation() {
     const { id } = useParams();
     const location = useLocation();
+
+    // State variables to manage order details, loading state, and error state
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,6 +16,11 @@ export default function OrderConfirmation() {
     // Get address information from router state
     const addressInfo = location.state?.address || {};
 
+    // Effect to fetch order details when the component mounts.
+    // Fetches order details from the API using the order ID.
+    // --
+    // Uses shipping address from the navigation state, as it 
+    // is not stored in the database.
     useEffect(() => {
         async function fetchOrderDetails() {
             try {
@@ -47,6 +56,8 @@ export default function OrderConfirmation() {
         fetchOrderDetails();
     }, [id]);
 
+    // Checks if the order is still loading, if there is an error,
+    // or if the order is not found, and renders the appropriate message.
     if (loading) {
         return <div className="order-container"><h2>Loading order details...</h2></div>;
     }
@@ -59,6 +70,7 @@ export default function OrderConfirmation() {
         return <div className="order-container"><h2>Order not found</h2></div>;
     }
 
+    // If all goes well, render the order confirmation page.
     return (
         <div className="order-container">
             <div className="order-content">
@@ -86,6 +98,7 @@ export default function OrderConfirmation() {
 
                     <div className="order-summary">
                         <h2>Order Summary</h2>
+                        {/* If the order has items, drender this */}
                         {order.items && order.items.length > 0 ? (
                             <>
                                 {order.items.map((item, index) => (
@@ -113,6 +126,7 @@ export default function OrderConfirmation() {
                                 </div>
                             </>
                         ) : (
+                            // If no items are found, display a message
                             <p>No items in this order.</p>
                         )}
                     </div>

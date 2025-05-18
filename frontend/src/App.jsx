@@ -8,7 +8,9 @@ import { useState } from "react";
 import { useAutoLogout } from "./features/useAutoLogout";
 
 export default function App() {
-  useAutoLogout(); // Feature to manage session timeout
+  // Feature to manage session timeout
+  useAutoLogout(); 
+  // State to manage the cart modal, defaults as closed
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   return (
