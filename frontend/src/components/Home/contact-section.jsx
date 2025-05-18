@@ -2,7 +2,8 @@ import '../../styles/contact.css'
 import '../../styles/home.css'
 import { useState } from 'react'
 
-
+// The ContactSection component.
+// Contains a form for users to send messages, which are sent to the database.
 export default function ContactSection() {
     const baseAPIUrl = import.meta.env.VITE_API_BASE_URL;
     const [formData, setFormData] = useState({
@@ -63,6 +64,7 @@ export default function ContactSection() {
         });
     }
 
+    // The actual rendered component.
     return (
         <section className='contact-section' id='contact'>
             <div className="contact-container">

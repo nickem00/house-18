@@ -1,8 +1,13 @@
 const baseAPIUrl = import.meta.env.VITE_API_BASE_URL;
 
+// Function for creating an order
+// Takes the cart items and shipping cost as arguments.
+// Returns an object with success or error message, and the data return
+// from the API.
 export async function createOrder(cartItems, shippingCost) {
     const token = localStorage.getItem("token");
 
+    // Returns an error if the user is not logged in.
     if (!token) {
         return { error: "User is not logged in" };
     }

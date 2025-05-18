@@ -1,5 +1,7 @@
 import '../../styles/home.css'
 
+// The AboutStoreSection component.
+// This component displays information about the store, including images and text.
 export default function AboutStoreSection() {
     return (
         <section className='about-store-section' id='about-store'>
