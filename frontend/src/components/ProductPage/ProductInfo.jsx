@@ -11,11 +11,12 @@ export default function ProductInfo({product}){
     const [isLoading, setIsLoading] = useState(false);
     const [isLiked, setIsLiked] = useState(null);
     
-useEffect(() => {
+    //Check if product has been saved by user earlier when component mounts
+    useEffect(() => {
         const checkFavoriteStatus = async () => {
             try {
                 const token = localStorage.getItem('token');
-                if (!token) return;
+                if (!token) return; //Must be logged in
 
                 const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
                 const response = await fetch(`${URL}/api/favorites/${product.product_id}`, {
@@ -36,18 +37,21 @@ useEffect(() => {
         checkFavoriteStatus();
     }, [product.product_id]);
     
+    //Adding and removing product from favorites
     const toggleFavorite = async (productId) => {
         try {
             setIsLoading(true);
             const token = localStorage.getItem('token');
             
+            //Must be logged in
             if (!token) {
                 alert("You must be logged in to add favorites");
-                return;
+                return; 
             }
 
             const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
             
+            //If liked = remove from favorites
             if (isLiked) {
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'DELETE',
@@ -61,6 +65,8 @@ useEffect(() => {
 
                 setIsLiked(false);
             } else {
+                
+                //If not liked = add to favorites
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'POST',
                     headers: {
@@ -88,12 +94,14 @@ useEffect(() => {
             <p>{product.price}kr</p>
 
             <section className="product-actions"  defaultValue="SIZE">
+                {/* Size selector dropdown */}
                 <select
                  className="size-menu"
                  name="sizes" id="sizes"
                  onChange={(e) => setSelectedSize(e.target.value)}
                  value={selectedSize}>
                 <option value="" disabled selected>SIZE</option>
+                {/*Mapping throug available sizes*/}
                 {product.variants.map((variant)=> (
                     <option 
                     key={variant._id}
@@ -107,6 +115,7 @@ useEffect(() => {
             </select>          
 
             <section className="actions-row">
+                {/* Add to cart button */}
                 <button
                 className="add-to-cart-btn"
                 onClick={() => {
@@ -115,6 +124,7 @@ useEffect(() => {
                     return;
                     }
 
+                    //Create cart item object
                     const cartItem = {
                     product_id: product.product_id,
                     name: product.name,
@@ -124,13 +134,14 @@ useEffect(() => {
                     quantity: 1,
                     };
 
+                    //Add to cart and then reset size
                     addToCart(cartItem);
                     setSelectedSize("");
                 }}
                 >
                 ADD TO CART
                 </button>
-
+                {/* Favorite toggle button */}
                 <button
                     className="favorite-btn"
                     onClick={() => toggleFavorite(product.product_id)}

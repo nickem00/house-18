@@ -1,3 +1,5 @@
+/*========Product Page========*/
+
 .product-page {
   display: flex;
   align-items: flex-start;
@@ -8,6 +10,7 @@
   font-size: 18px;
   height: 100vh;
 }
+/*========Product Gallery========*/
 
 .product-images {
   display: flex;
@@ -59,6 +62,8 @@
   font-weight: 400;
   font-size: 1.5em;
 }
+
+/*========Action Buttons========*/
 
 .add-to-cart-btn {
   background-color: #A06A4B; 
@@ -114,6 +119,7 @@
   opacity: 0.5;
 }
 
+/*========Size Selector========*/
 
 .size-menu {
   background-color: #B47C5400;
@@ -135,6 +141,8 @@
 .size-menu:hover {
   cursor: pointer;
 }
+
+/*========Details and Description========*/
 
 .shipping-and-details {
   flex-direction: column;

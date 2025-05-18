@@ -9,10 +9,11 @@ export default function ProductCard({product}) {
     const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
+        //Check if product has been saved by user earlier when component mounts
         const checkFavoriteStatus = async () => {
             try {
                 const token = localStorage.getItem('token');
-                if (!token) return;
+                if (!token) return; //Must be logged in
 
                 const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
                 const response = await fetch(`${URL}/api/favorites/${product.product_id}`, {
@@ -33,11 +34,13 @@ export default function ProductCard({product}) {
         checkFavoriteStatus();
     }, [product.product_id]);
     
+    //Adding and removing product from favorites
     const toggleFavorite = async (productId) => {
         try {
             setIsLoading(true);
             const token = localStorage.getItem('token');
             
+            //Must be logged in
             if (!token) {
                 alert("You must be logged in to add favorites");
                 return;
@@ -45,6 +48,7 @@ export default function ProductCard({product}) {
 
             const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
             
+            //If liked = remove from favorites
             if (isLiked) {
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'DELETE',
@@ -58,6 +62,7 @@ export default function ProductCard({product}) {
 
                 setIsLiked(false);
             } else {
+                //If not liked = add to favorites
                 const response = await fetch(`${URL}/api/favorites/${productId}`, {
                     method: 'POST',
                     headers: {
@@ -81,7 +86,7 @@ export default function ProductCard({product}) {
     
     return(
         <article className="card">
-            
+            {/* Product images*/}
             <Link to={`/products/${product.product_id}`} className="product-image-container">
                 <img src={product.images[0]} alt={product.name} className="product-img main-img" />
                 <img src={product.images[1]} alt={product.name} className="product-img hover-img" />
@@ -90,7 +95,8 @@ export default function ProductCard({product}) {
             <Link to={`/products/${product.product_id}`} className="product-name">{product.name}</Link>
 
             <p className="product-brand">HOUSE 18</p>
-
+            
+            {/* Price and favorite button container */}
              <div className="icon-container">
              <p className="product-price">{product.price}kr</p>
                 <FontAwesomeIcon 
