@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import '../../styles/home.css';
 
+// The HeroSection component, which is the first section of the home page.
+// It contains a title, a subtitle, and a button that links to the store page.
 export default function HeroSection() {
 
     return (

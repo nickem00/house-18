@@ -83,28 +83,14 @@ export default function Checkout() {
         return enrichedCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + shippingCost;
     };
 
-    // Prepared order data structure - remove the variable assignment to avoid unused variable warning
-    // Order data shape for reference:
-    // {
-    //     items: enrichedCartItems,
-    //     shipping: {
-    //         fullName,
-    //         email,
-    //         address,
-    //         city,
-    //         postalCode,
-    //         country,
-    //         method: shippingMethod,
-    //         cost: shippingCost
-    //     },
-    //     total: calculateTotal()
-    // };
-
+    // The actual HTML for the checkout page
     return (
         <div className="checkout-container">
             <h1>Checkout</h1>
             <div className="checkout-flex-container">
-                <div className="checkout-left-shipping">                    <div className="checkout-shipping-address">
+                <div className="checkout-left-shipping">
+                    {/* Shipping Information Form */}
+                    <div className="checkout-shipping-address">
                         <h2>Shipping Address</h2>
                         <form className="contact-shipping-form">
                             <input 
@@ -150,9 +136,11 @@ export default function Checkout() {
                         </form>
                     </div>
                     
+                    {/* Shipping Method Form */}
                     <div className="checkout-shipping-method">
                         <h2>Shipping Method</h2>
-                        <form className="shipping-method-form">                            <label>
+                        <form className="shipping-method-form">                            
+                            <label>
                                 <input 
                                     type="radio" 
                                     name="shipping-method" 
@@ -185,7 +173,10 @@ export default function Checkout() {
                                 </p>
                             </label>
                         </form>
-                    </div>                    <div className="checkout-payment-details">
+                    </div>
+
+                    {/* Payment Details Form */}
+                    <div className="checkout-payment-details">
                         <h2>Payment Details</h2>
                         <form className="payment-details-form">
                             <input 
@@ -231,8 +222,12 @@ export default function Checkout() {
                         >
                             PLACE ORDER
                     </button>
-                </div>                <div className="checkout-right-summary">
+                </div>
+
+                {/* Order Summary */}
+                <div className="checkout-right-summary">
                     <h2>Order Summary</h2>
+                    {/* If there are orders, render this */}
                     {enrichedCartItems.length > 0 ? (
                         <>
                             {enrichedCartItems.map((item, index) => (
@@ -260,6 +255,7 @@ export default function Checkout() {
                             </div>
                         </>
                     ) : (
+                        // If no items are found, display a message
                         <p>Your Cart is empty.</p>
                     )}
                 </div>
@@ -267,17 +263,3 @@ export default function Checkout() {
         </div>
     )
 }
-
-// Use the following code to display cart items in the checkout page
-{/* <div>
-    {enrichedCartItems.length > 0 ? (
-        enrichedCartItems.map((item, index) => (
-            <div key={index}>
-                <p>{item.name}</p>
-                <p>{item.price}</p>
-            </div>
-        ))
-    ) : (
-        <p>Your Cart is empty.</p>
-    )}
-</div> */}

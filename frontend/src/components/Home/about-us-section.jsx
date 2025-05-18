@@ -1,6 +1,8 @@
 import '../../styles/home.css'
 import TeamCard from './TeamCard'
 
+// The AboutUsSection component.
+// Imports and uses the TeamCard component to display team members.
 export default function AboutUsSection() {
     return (
         <section className='about-us-section' id='about-us'>
