@@ -12,6 +12,8 @@ import ProtectedAdminRoute from "./features/ProtectedAdminRoute";
 import ProfilePage from "./pages/ProfilePage";
 import OrderConfirmation from "./pages/OrderConfirmation";
 
+// Creates a ruter for the application using react-router-dom.
+// Defines the elements to be rendered for each route.
 export const router = createBrowserRouter([
     {
         path: "/",

@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from "react";
 import { useCart } from "../context/useCart";
 
+// The Header component includes the logo, navigation links, icons and cart.
+// It uses UseEffect to check if the screen size is mobile or desktop,
+// and renders the appropriate navigation accordingly.
 export default function Header({ setIsCartOpen, isCartOpen }) {
     const [ isHeartHovered, setIsHeartHovered ] = useState(false);
     const [ mobileMenuOpen, setMobileMenuOpen ] = useState(false);
@@ -34,7 +37,10 @@ export default function Header({ setIsCartOpen, isCartOpen }) {
             // Clean up body class when component unmounts
             document.body.classList.remove('menu-open');
         };
-    }, []);return (
+    }, []);
+    
+    // The actual header component
+    return (
         <header>
             <div className="container header-content">
                 {/* Desktop Navigation */}
