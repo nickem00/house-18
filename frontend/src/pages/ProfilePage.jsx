@@ -17,6 +17,8 @@ export default function ProfilePage() {
     const navigate = useNavigate();
     const URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/";
 
+    // Function to fetch user data and check if the user is logged in.
+    // Uses UseState to render the data.
     const loadUserData = async () => {
         setLoading(true);
         const result = await fetchUserInfo();
@@ -31,13 +33,18 @@ export default function ProfilePage() {
             // Check if user is admin
             setUserIsAdmin(isAdmin());
         }
-        setLoading(false);    };
+        setLoading(false);    
+    };
     
+    // Effect to load user data when the component loads
+    // and when the navigate function changes.
     useEffect(() => {
         loadUserData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate]);
     
+    // If loading, return a loading message.
+    // If there is an error, return an error message.
     if (loading) return <div className="profile-page-container">Loading user information...</div>;
     if (error) return <div className="profile-page-container">Error: {error}</div>;
     
@@ -45,6 +52,8 @@ export default function ProfilePage() {
         logout(navigate);
     };
     
+    // Function for unliking a product
+    // Removes the product from the likedProducts in the database
     const unlikeProduct = async (productId) => {
         try {
             setRemovingProductId(productId);
@@ -78,6 +87,8 @@ export default function ProfilePage() {
         }
     };
     
+    // The actual profile page component
+    // Imports components from components/ProfilePage
     return (
         <div className="profile-page-container">
             <h1>Your Profile</h1>

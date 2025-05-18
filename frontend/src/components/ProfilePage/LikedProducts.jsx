@@ -4,10 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/ProfilePage.css';
 
+// Components for displaying the user's liked products in the profile page.
+// This component shows a list of products that the user has liked.
 export default function LikedProducts({ likedProducts, removingProductId, unlikeProduct }) {
     return (
         <div id='#liked-products' className='profile-liked-products'>
             <h2>Liked Products:</h2>
+            {/* If liked products are found, return this */}
             {likedProducts && likedProducts.length > 0 ? (
                 <ul className="liked-products-grid">
                     {likedProducts.map((product) => (
@@ -40,6 +43,7 @@ export default function LikedProducts({ likedProducts, removingProductId, unlike
                     ))}
                 </ul>
             ) : (
+                // If no liked products are found, display a message
                 <p>No liked products found.</p>
             )}
         </div>

@@ -1,3 +1,4 @@
+/* CSS containing global rules and variables */
 :root {
     --background-color: #000;
     --text-color: #fff;
@@ -19,7 +20,6 @@
     --about-store-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 50%);
 }
 
-/* Ta bort padding här */
 html {
     padding: 0;
     scroll-behavior: smooth;

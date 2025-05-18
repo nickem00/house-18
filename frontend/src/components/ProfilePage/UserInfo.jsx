@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/ProfilePage.css';
 
+// Components for displaying the user's basic information
+// Also contains button for admin dashboard, if the user is an admin.
 export default function UserInfo({ userData, userIsAdmin, handleLogout }) {
     return (
         <div className="profile-summary-button-container">
