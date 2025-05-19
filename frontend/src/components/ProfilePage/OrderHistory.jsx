@@ -1,5 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../styles/ProfilePage.css';
+import '../../features/icons';
 
 // Component for the Order History section of the profile page.
 // Displays a list of orders made by the user.
@@ -19,11 +21,23 @@ export default function OrderHistory({ orders }) {
                             <div className="order-items">
                                 <p><strong>Items:</strong></p>
                                 <ul>
-                                    {order.items.map((item, index) => (
-                                        <li key={index} className='order-item'>
-                                            <p>{item.product.name} - Size: {item.size}, Qty: {item.quantity}</p>
-                                        </li>
-                                    ))}
+                                    {order.items.map((item, index) => {
+                                        // Check if the product exists
+                                        const productExists = item.product && item.product.name;
+                                        
+                                        return (
+                                            <li key={index} className={`order-item ${!productExists ? 'order-item-unavailable' : ''}`}>
+                                                {productExists ? (
+                                                    <p>{item.product.name} - Size: {item.size}, Qty: {item.quantity}</p>
+                                                ) : (
+                                                    <p className="unavailable-product-text">
+                                                        <FontAwesomeIcon icon="exclamation-triangle" className="unavailable-icon" />
+                                                        Product no longer available - Size: {item.size}, Qty: {item.quantity}
+                                                    </p>
+                                                )}
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </div>
                         </li>

@@ -240,6 +240,47 @@ body.light-mode .unlike-button.loading {
     color: #ccc;
 }
 
+/* Styling for unavailable products */
+.product-unavailable {
+    background-color: rgba(60, 60, 60, 0.8);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.product-unavailable-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 1rem;
+    cursor: default;
+}
+
+.product-unavailable-icon {
+    font-size: 2rem;
+    color: #ff0000;
+    margin-bottom: 1rem;
+}
+
+.product-unavailable-text {
+    color: #aaa;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+body.light-mode .product-unavailable {
+    background-color: rgba(245, 245, 245, 0.9);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+body.light-mode .product-unavailable-icon {
+    color: #3700ff;
+}
+
+body.light-mode .product-unavailable-text {
+    color: #666;
+}
+
 /* Order card specific styling. We keep the original style for order cards, and have a separate style for liked products */
 .profile-orders li {
     padding: 1rem;
@@ -338,6 +379,37 @@ body.light-mode .order-items {
 .order-items li:hover {
     transform: none;
     box-shadow: none;
+}
+
+/* Styling for unavailable order items */
+.order-item-unavailable {
+    background-color: rgba(60, 60, 60, 0.4);
+    border-left: 3px solid #ff6b6b;
+    padding-left: 1rem !important;
+}
+
+.unavailable-product-text {
+    color: #aaa;
+    font-style: italic;
+}
+
+.unavailable-icon {
+    color: #ff6b6b;
+    margin-right: 0.5rem;
+}
+
+body.light-mode .order-item-unavailable {
+    background-color: rgba(245, 245, 245, 0.8);
+    border-left: 3px solid #ff4040;
+    padding-left: 1rem;
+}
+
+body.light-mode .unavailable-product-text {
+    color: #777;
+}
+
+body.light-mode .unavailable-icon {
+    color: #ff4040;
 }
 
 @media (max-width: 768px) {
